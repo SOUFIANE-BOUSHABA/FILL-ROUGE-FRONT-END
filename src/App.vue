@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <header class="shadow-sm  bg-white">
+    <header class=" sticky-top shadow-sm  bg-white">
       <nav class="navbar container navbar-expand-lg">
         <div class="container-fluid">
           <div>
@@ -65,4 +65,8 @@ export default {
 </script>
 
 <style scoped>
+
+.sticky-top {
+
+}
 </style>

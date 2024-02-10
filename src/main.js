@@ -7,8 +7,8 @@ import router from './router' ;
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { faMagnifyingGlass , faUser } from '@fortawesome/free-solid-svg-icons'
+import { faMagnifyingGlass , faUser,faHouse ,faChartLine , faList , faMessage ,faUsers , faCircleUp , faCircleDown} from '@fortawesome/free-solid-svg-icons'
 
-library.add(faMagnifyingGlass , faUser);
+library.add(faMagnifyingGlass , faUser , faHouse,faChartLine , faList , faMessage ,faUsers ,faCircleUp ,faCircleDown);
 
 createApp(App).use(router).component('font-awesome-icon', FontAwesomeIcon).mount('#app');

@@ -18,7 +18,7 @@ const routes = [
   { path: '/', 
   component: AppInterface ,
   children: [
-    { path: '/', component: Home },
+    { path: '', component: Home },
     { path: 'explore', component: ExploreTopics },
     { path: 'MyTopics', component: MyTopics },
   ],

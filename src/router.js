@@ -4,12 +4,14 @@ import AppInterface from './views/AppPost.vue';
 import Home from './components/postcomponents/AppHome.vue';
 import ExploreTopics from './components/postcomponents/AppExploreTopics.vue';
 import MyTopics from './components/postcomponents/AppMyTopics.vue';
+import ErrorView from './components/postcomponents/AppError404.vue';
 
 
 import auttemplate from './views/AppAuth.vue';
 import LoginComponent from './components/authcomponents/AppLogin.vue';
 import RegisterComponent from './components/authcomponents/AppRegister.vue';
 import ForgotComponent from './components/authcomponents/AppForgotten.vue';
+
 
 
 import { createRouter, createWebHistory } from 'vue-router';
@@ -21,6 +23,7 @@ const routes = [
     { path: '', component: Home },
     { path: 'explore', component: ExploreTopics },
     { path: 'MyTopics', component: MyTopics },
+    { path: '/:pathMatch(.*)*', component: ErrorView  },
   ],
 
 },
@@ -33,6 +36,7 @@ const routes = [
           { path: 'forgot', component: ForgotComponent },
         ],
  },
+
  
 
 ];

@@ -24,7 +24,7 @@
       <router-link :to="{ path: '/dashboard' }" class="sidebar-link" :class="{ 'active-link': isLinkActive('/dashboard') }">
         <font-awesome-icon :icon="['fas', 'users']" />
         Users
-      </router-link>
+      </router-link>   
     </div>
   </div>
 </template>

@@ -21,7 +21,7 @@
         My Answers
       </router-link>
 
-      <router-link :to="{ path: '/dashboard' }" class="sidebar-link" :class="{ 'active-link': isLinkActive('/dashboard') }">
+      <router-link :to="{ path: '/personel/allusers' }" class="sidebar-link" :class="{ 'active-link': isLinkActive('/personel/allusers') }">
         <font-awesome-icon :icon="['fas', 'users']" />
         Users
       </router-link>   

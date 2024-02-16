@@ -15,6 +15,7 @@ import ForgotComponent from './components/authcomponents/AppForgotten.vue';
 
 import personnel from './views/AppPersonnel.vue';
 import MyAnswers from './components/personnelcomponents/AppMyAnsewrs.vue';
+import allusers from './components/personnelcomponents/AppUsers.vue';
 
 
 import { createRouter, createWebHistory } from 'vue-router';
@@ -45,6 +46,7 @@ const routes = [
     component: personnel,
     children: [
           { path: 'MyAnswers', component: MyAnswers },
+          { path: 'allusers', component: allusers },
          
         ],
  }

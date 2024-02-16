@@ -38,6 +38,7 @@
                   </a>
                   <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="/personel/profile">profile</a></li>
+                    <li><a class="dropdown-item" href="/personel/contact">contact</a></li>
                     <li><a class="dropdown-item" href="#">parameter</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="#">logout</a></li>

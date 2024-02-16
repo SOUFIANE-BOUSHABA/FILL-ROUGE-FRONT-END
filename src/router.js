@@ -17,6 +17,7 @@ import personnel from './views/AppPersonnel.vue';
 import MyAnswers from './components/personnelcomponents/AppMyAnsewrs.vue';
 import allusers from './components/personnelcomponents/AppUsers.vue';
 import profile from './components/personnelcomponents/AppProfile.vue';
+import contact from './components/personnelcomponents/AppContact.vue';
 
 
 import { createRouter, createWebHistory } from 'vue-router';
@@ -49,6 +50,7 @@ const routes = [
           { path: 'MyAnswers', component: MyAnswers },
           { path: 'allusers', component: allusers },
           { path: 'profile', component: profile },
+          { path: 'contact', component: contact },
          
         ],
  }

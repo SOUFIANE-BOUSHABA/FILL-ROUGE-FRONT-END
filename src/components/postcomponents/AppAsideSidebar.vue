@@ -16,7 +16,7 @@
         My Topics
       </router-link>
 
-      <router-link :to="{ path: '/dashboard' }" class="sidebar-link" :class="{ 'active-link': isLinkActive('/dashboard') }">
+      <router-link :to="{ path: '/personel/MyAnswers' }" class="sidebar-link" :class="{ 'active-link': isLinkActive('/personel/MyAnswers') }">
         <font-awesome-icon :icon="['fas', 'message']" />
         My Answers
       </router-link>

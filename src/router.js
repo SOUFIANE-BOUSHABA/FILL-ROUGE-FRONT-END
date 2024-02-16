@@ -13,6 +13,9 @@ import RegisterComponent from './components/authcomponents/AppRegister.vue';
 import ForgotComponent from './components/authcomponents/AppForgotten.vue';
 
 
+import personnel from './views/AppPersonnel.vue';
+import MyAnswers from './components/personnelcomponents/AppMyAnsewrs.vue';
+
 
 import { createRouter, createWebHistory } from 'vue-router';
 
@@ -36,6 +39,15 @@ const routes = [
           { path: 'forgot', component: ForgotComponent },
         ],
  },
+ 
+  { 
+    path: '/personel', 
+    component: personnel,
+    children: [
+          { path: 'MyAnswers', component: MyAnswers },
+         
+        ],
+ }
 
  
 

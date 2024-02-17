@@ -38,7 +38,6 @@
                   </a>
                   <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="/personel/profile">profile</a></li>
-                    <li><a class="dropdown-item" href="/personel/contact">contact</a></li>
                     <li><a class="dropdown-item" href="#">parameter</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="#">logout</a></li>
@@ -56,6 +55,31 @@
     <div class="container mt-4">
       <router-view></router-view>
     </div>
+
+
+
+    <footer class="mt-4 border-top pt-4">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-2">
+            <router-link class="footer-link" to="/personel/contact">Contact Us</router-link>
+          </div>
+          <div class="col-md-2">
+            <router-link class="footer-link" to="/about">About Us</router-link>
+          </div>
+          <div class="col-md-2">
+            <router-link class="footer-link" to="/q&a">Q&A</router-link>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-md-12">
+            <a href="#" class="me-3"><font-awesome-icon :icon="['fas', 'facebook']" /></a>
+            <a href="#" class="me-3"><font-awesome-icon :icon="['fas', 'twitter']" /></a>
+            <a href="#" class="me-3"><font-awesome-icon :icon="['fas', 'instagram']" /></a>
+          </div>
+        </div>
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -67,7 +91,13 @@ export default {
 
 <style scoped>
 
-.sticky-top {
-
-}
+  .footer-link{
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+  }
+  .footer-link:hover{
+    color: #425EF1; 
+  }
+  
 </style>

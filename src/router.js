@@ -20,6 +20,8 @@ import profile from './components/personnelcomponents/AppProfile.vue';
 import contact from './components/personnelcomponents/AppContact.vue';
 
 
+import aboutus from './views/AppAboutUs.vue';
+
 import { createRouter, createWebHistory } from 'vue-router';
 
 const routes = [
@@ -53,7 +55,9 @@ const routes = [
           { path: 'contact', component: contact },
          
         ],
- }
+ },
+ 
+ {  path: '/about',   component: aboutus }
 
  
 

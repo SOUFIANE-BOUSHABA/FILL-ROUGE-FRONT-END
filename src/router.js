@@ -22,6 +22,8 @@ import contact from './components/personnelcomponents/AppContact.vue';
 
 import aboutus from './views/AppAboutUs.vue';
 
+import QandA from './views/AppQ&A.vue';
+
 import { createRouter, createWebHistory } from 'vue-router';
 
 const routes = [
@@ -33,7 +35,6 @@ const routes = [
     { path: 'MyTopics', component: MyTopics },
     { path: '/:pathMatch(.*)*', component: ErrorView  },
   ],
-
 },
   { 
     path: '/userauth', 
@@ -44,7 +45,6 @@ const routes = [
           { path: 'forgot', component: ForgotComponent },
         ],
  },
- 
   { 
     path: '/personel', 
     component: personnel,
@@ -53,11 +53,11 @@ const routes = [
           { path: 'allusers', component: allusers },
           { path: 'profile', component: profile },
           { path: 'contact', component: contact },
-         
         ],
  },
- 
- {  path: '/about',   component: aboutus }
+ {  path: '/about',   component: aboutus },
+ {  path: '/q&a',   component: QandA }
+
 
  
 

@@ -68,7 +68,7 @@
             <router-link class="footer-link" to="/about">About Us</router-link>
           </div>
           <div class="col-md-2">
-            <router-link class="footer-link" to="/q&a">Q&A</router-link>
+            <router-link class="footer-link" to="/personel/q&a">Q&A</router-link>
           </div>
         </div>
         <div class="row mt-3">

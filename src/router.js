@@ -18,11 +18,11 @@ import MyAnswers from './components/personnelcomponents/AppMyAnsewrs.vue';
 import allusers from './components/personnelcomponents/AppUsers.vue';
 import profile from './components/personnelcomponents/AppProfile.vue';
 import contact from './components/personnelcomponents/AppContact.vue';
+import QandA from './components/personnelcomponents/AppQ&A.vue';
 
 
 import aboutus from './views/AppAboutUs.vue';
 
-import QandA from './views/AppQ&A.vue';
 
 import { createRouter, createWebHistory } from 'vue-router';
 
@@ -53,13 +53,10 @@ const routes = [
           { path: 'allusers', component: allusers },
           { path: 'profile', component: profile },
           { path: 'contact', component: contact },
+          { path: 'q&a', component: QandA },
         ],
  },
  {  path: '/about',   component: aboutus },
- {  path: '/q&a',   component: QandA }
-
-
- 
 
 ];
 

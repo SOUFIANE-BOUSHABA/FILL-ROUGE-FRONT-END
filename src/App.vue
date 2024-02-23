@@ -71,13 +71,13 @@
             <router-link class="footer-link" to="/personel/q&a">Q&A</router-link>
           </div>
         </div>
-        <div class="row mt-3">
+        <!-- <div class="row mt-3">
           <div class="col-md-12">
             <a href="#" class="me-3"><font-awesome-icon :icon="['fas', 'facebook']" /></a>
             <a href="#" class="me-3"><font-awesome-icon :icon="['fas', 'twitter']" /></a>
             <a href="#" class="me-3"><font-awesome-icon :icon="['fas', 'instagram']" /></a>
           </div>
-        </div>
+        </div> -->
       </div>
     </footer>
   </div>

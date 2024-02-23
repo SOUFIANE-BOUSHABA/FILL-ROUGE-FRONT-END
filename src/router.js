@@ -22,6 +22,7 @@ import QandA from './components/personnelcomponents/AppQ&A.vue';
 
 
 import aboutus from './views/AppAboutUs.vue';
+import addtopics from './views/AppAddTopics.vue';
 
 
 import { createRouter, createWebHistory } from 'vue-router';
@@ -57,6 +58,7 @@ const routes = [
         ],
  },
  {  path: '/about',   component: aboutus },
+ {  path: '/addtopics',   component: addtopics },
 
 ];
 

@@ -30,5 +30,7 @@
   </script>
   
   <style scoped>
-  
+  .container{
+    margin-bottom: 200px;
+  }
   </style>

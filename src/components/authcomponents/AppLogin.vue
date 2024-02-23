@@ -47,10 +47,10 @@ export default {
           password: this.password,
         });
 
-        console.log(response.data);
-
-        this.$router.push('/');
-
+        const token = response.data.token;
+        localStorage.setItem('jwt', token);
+        console.log('Token stored:', token);
+        this.$router.push('/personel/profile');
       } catch (error) {
         console.error('Login failed:', error);
       }

@@ -73,11 +73,10 @@ const routes = [
         { path: 'statistique', component: statistique },
        ],
        beforeEnter: (to, from, next) => {
-        // Check if the user is an admin
         if (store.getters['auth/isAdmin']) {
-          next(); // Allow the navigation
+          next();
         } else {
-          next('/personel/allusers'); // Redirect to '/personel/allusers'
+          next('/personel/allusers'); 
         }
       }
 },

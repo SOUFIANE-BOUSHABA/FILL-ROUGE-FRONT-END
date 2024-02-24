@@ -26,6 +26,7 @@ import addtopics from './views/AppAddTopics.vue';
 
 
 import admin from './views/AppAdmin.vue';
+import statistique from './components/admincomponents/AppStatistique.vue';
 
 
 import { createRouter, createWebHistory } from 'vue-router';
@@ -67,6 +68,7 @@ const routes = [
    path: '/admin', 
    component: admin,
    children: [
+        { path: 'statistique', component: statistique },
        ],
 },
 ];

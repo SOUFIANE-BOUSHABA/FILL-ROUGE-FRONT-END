@@ -47,10 +47,19 @@ export default {
           password: this.password,
         });
 
+        const userRole = response.data.role.name;
+
         const token = response.data.token;
         localStorage.setItem('jwt', token);
         console.log('Token stored:', token);
-        this.$router.push('/personel/profile');
+
+        if (userRole === 'user') {
+          this.$router.push('/');
+        } else if (userRole === 'admin') {
+          this.$router.push('/admin/statistique');
+        } else {
+          console.error('Unknown role:', userRole);
+        }
       } catch (error) {
         console.error('Login failed:', error);
       }

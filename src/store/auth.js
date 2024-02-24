@@ -1,11 +1,15 @@
 
 const state = {
     user: null,
+  
   };
   
   const getters = {
     isAdmin: (state) => {
       return state.user && state.user.role === 'admin';
+    },
+    isloggedIn: (state) => {
+        return state.user !== null;
     },
   };
   

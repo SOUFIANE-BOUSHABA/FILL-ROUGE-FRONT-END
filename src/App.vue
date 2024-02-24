@@ -40,9 +40,16 @@
                     <li><a class="dropdown-item" href="/personel/profile">profile</a></li>
                     <li><a class="dropdown-item" href="#">parameter</a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#">logout</a></li>
-                    <li> <router-link to="/userauth/login" class="dropdown-item">Login</router-link></li>
-                    <li><a class="dropdown-item" href="#">register</a></li>
+                    <li v-if="$store.getters.isloggedIn">
+                        <a class="dropdown-item" @click="logout">Logout</a>
+                      </li>
+                      <li v-else>
+                        <router-link to="/userauth/login" class="dropdown-item">Login</router-link>
+                      </li>
+                      <li v-if="!$store.getters.isloggedIn">
+                        <router-link to="/userauth/register" class="dropdown-item">Register</router-link>
+                      </li>
+                   
                   </ul>
                 </li>
               </ul>
@@ -87,6 +94,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'App',
 }

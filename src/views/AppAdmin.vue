@@ -63,7 +63,6 @@
   </template>
   
   <script>
-import axios from 'axios';
   export default {
     methods: {
         toggleAside() {
@@ -93,39 +92,8 @@ import axios from 'axios';
         },
 
 
-    async checkUser() {
-      const token = localStorage.getItem('jwt');
-
-      if (!token) {
-        this.$router.push('/home'); 
-        return;
-      }
-
-      try {
-        const response = await axios.get('http://127.0.0.1:8000/api/user', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        const userRole = response.data.role.name;
-
-        if (userRole === 'admin') {
-            this.$router.push('/admin');
-        } else {
-          this.$router.push('/personel/allusers');
-        }
-      } catch (error) {
-        console.error('Token validation failed:', error);
-        this.$router.push('/login'); 
-      }
     },
 
-    },
-
-    mounted() {
-    this.checkUser();
-  },
 };
   </script>
   <style scoped>

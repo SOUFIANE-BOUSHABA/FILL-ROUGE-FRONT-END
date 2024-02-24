@@ -29,6 +29,8 @@ import admin from './views/AppAdmin.vue';
 import statistique from './components/admincomponents/AppStatistique.vue';
 
 
+import store from './store';
+
 import { createRouter, createWebHistory } from 'vue-router';
 
 const routes = [
@@ -70,6 +72,14 @@ const routes = [
    children: [
         { path: 'statistique', component: statistique },
        ],
+       beforeEnter: (to, from, next) => {
+        // Check if the user is an admin
+        if (store.getters['auth/isAdmin']) {
+          next(); // Allow the navigation
+        } else {
+          next('/personel/allusers'); // Redirect to '/personel/allusers'
+        }
+      }
 },
 ];
 

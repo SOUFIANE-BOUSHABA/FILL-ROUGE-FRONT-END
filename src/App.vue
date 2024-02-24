@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <header class=" sticky-top shadow-sm  bg-white">
+    <header v-if="!$route.path.includes('/admin')" class=" sticky-top shadow-sm  bg-white">
       <nav class="navbar container navbar-expand-lg">
         <div class="container-fluid">
           <div>
@@ -52,13 +52,16 @@
       </nav>
     </header>
 
-    <div class="container mt-4">
+    <div v-if="!$route.path.includes('/admin')" class="container mt-4">
+      <router-view></router-view>
+    </div>
+    <div v-else>
       <router-view></router-view>
     </div>
 
 
 
-    <footer class="mt-4 border-top pt-4">
+    <footer v-if="!$route.path.includes('/admin')" class="mt-4 border-top pt-4">
       <div class="container">
         <div class="row">
           <div class="col-md-2">

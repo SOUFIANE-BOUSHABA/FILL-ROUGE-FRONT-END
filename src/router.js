@@ -25,6 +25,9 @@ import aboutus from './views/AppAboutUs.vue';
 import addtopics from './views/AppAddTopics.vue';
 
 
+import admin from './views/AppAdmin.vue';
+
+
 import { createRouter, createWebHistory } from 'vue-router';
 
 const routes = [
@@ -59,7 +62,13 @@ const routes = [
  },
  {  path: '/about',   component: aboutus },
  {  path: '/addtopics',   component: addtopics },
-
+ 
+ { 
+   path: '/admin', 
+   component: admin,
+   children: [
+       ],
+},
 ];
 
 const router = createRouter({

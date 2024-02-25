@@ -1,10 +1,11 @@
 <template>
     <div class="mt-4 ">
       <div class="container" >
-        <div v-if="token" class="mt-4">
-        <h3>Authentication Token:</h3>
-        <pre>{{ token }}</pre>
+        <div v-if="user && role">
+        <p>User: {{ user.first_name }} {{ user.last_name }}</p>
+        <p>Role: {{ role.name }}</p>
       </div>
+         
         <div  v-for="post in posts" :key="post.id" class="row opacity-75 shadow-sm p-4 mb-4" >
           <div class="col-md-2 d-grid ">
             <div class="d-flex mt-3 flex-column align-items-center">
@@ -45,7 +46,11 @@
   </template>
   
   <script>
+  import { mapGetters } from 'vuex';
   export default {
+    computed: {
+    ...mapGetters('auth', ['user', 'role', 'isLoggedIn']),
+  },
     name: 'AppHome',
     data() {
       return {
@@ -94,30 +99,7 @@
         token: null,
       };
     },
-    mounted() {
-  // Access the token from the cookie or any other storage
-  this.token = this.getCookie('jwt'); // Assuming the cookie name is 'jwt'
-  console.log('Token:', this.token);
-
-  // Additional logging for debugging
-  console.log('All Cookies:', document.cookie);
-},
-methods: {
-  getCookie(name) {
-    const cookies = document.cookie.split(';');
-    for (let i = 0; i < cookies.length; i++) {
-      const cookie = cookies[i].trim();
-      // Check if the cookie starts with the provided name
-      if (cookie.startsWith(`${name}=`)) {
-        // Return the value of the cookie
-        return cookie.substring(name.length + 1);
-      }
-    }
-    // Return null if the cookie is not found
-    return null;
-  },
-},
-
+  
   };
   </script>
   

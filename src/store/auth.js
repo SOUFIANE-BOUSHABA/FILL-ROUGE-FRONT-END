@@ -1,24 +1,30 @@
 
 const state = {
     user: null,
-  
+    userRole: null,
+    token: localStorage.getItem('jwt') || null,
+    isAdmin: null,
   };
   
   const getters = {
-    isAdmin: (state) => {
-      return state.user && state.user.role === 'admin';
-    },
-   
+    user: state => state.user,
+    role: state => state.userRole,
+    isLoggedIn: state => state.token !== null,
+    isAdmin: state => state.userRole=== 'admin',
   };
   
   const mutations = {
-    setUser: (state, user) => {
+    setUser: (state, { user, userRole }) => {
       state.user = user;
+      state.userRole = userRole;
+    },
+    setToken: (state, token) => {
+      state.token = token;
+      localStorage.setItem('jwt', token);
     },
   };
   
-  const actions = {
-  };
+  const actions = {};
   
   export default {
     state,

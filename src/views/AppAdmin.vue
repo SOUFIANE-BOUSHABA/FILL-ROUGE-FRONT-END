@@ -64,6 +64,8 @@
   
   <script>
   export default {
+    name: 'AppAdmin',
+  
     methods: {
         toggleAside() {
             var aside = document.getElementById("myAside");
@@ -90,9 +92,11 @@
                 });
             }
         },
-
-
+      
+       
     },
+
+
 
 };
   </script>

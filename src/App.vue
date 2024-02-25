@@ -43,7 +43,7 @@
                     <li v-if="isLoggedIn">
                       <button @click="logout" class="btn w-100">Logout</button>
                     </li>
-                    <li v-else>
+                    <li v-if="!isLoggedIn">
                       <router-link to="/userauth/login" class="dropdown-item">Login</router-link>
                     </li>
                     <li v-if="!isLoggedIn">
@@ -98,14 +98,11 @@ import axios from 'axios';
 
 export default {
   name: 'App',
-  data() {
-    return {
-      isLoggedIn: false,
-    };
-  },
-  mounted() {
-    const token = localStorage.getItem('jwt');
-    this.isLoggedIn = token !== null && token !== 'null' && token !== 'undefined';
+
+  computed: {
+    isLoggedIn() {
+      return this.$store.getters.isLoggedIn;
+    }
   },
   methods: {
     async logout() {
@@ -124,8 +121,7 @@ export default {
       }
     },
   },
- 
-}
+};
 </script>
 
 

@@ -39,32 +39,40 @@ export default {
       rememberMe: false,
     };
   },
+
+  
   methods: {
-    async login() {
-      try {
-        const response = await axios.post('http://127.0.0.1:8000/api/login', {
-          email: this.email,
-          password: this.password,
-        });
+  async login() {
+    try {
+      const response = await axios.post('http://127.0.0.1:8000/api/login', {
+        email: this.email,
+        password: this.password,
+      });
 
-        const userRole = response.data.role.name;
+      const user = response.data.user;
+      const userRole = response.data.role.name;
 
-        const token = response.data.token;
-        localStorage.setItem('jwt', token);
-        console.log('Token stored:', token);
+      const token = response.data.token;
+      localStorage.setItem('jwt', token);
+      localStorage.setItem('userRole', userRole);
 
-        if (userRole === 'user') {
-          this.$router.push('/');
-        } else if (userRole === 'admin') {
-          this.$router.push('/admin/statistique');
-        } else {
-          console.error('Unknown role:', userRole);
-        }
-      } catch (error) {
-        console.error('Login failed:', error);
+      this.$store.commit('setUser', { user, userRole  });
+      this.$store.commit('setToken', token);
+      console.log('User:', this.$store.getters.user);
+      console.log('Role:', this.$store.getters.role);
+      console.log('admin:', this.$store.getters.isAdmin);
+      if (userRole === 'user') {
+        this.$router.push('/');
+      } else if (userRole === 'admin') {
+        this.$router.push('/admin/statistique');
+      } else {
+        console.error('Unknown role:', userRole);
       }
-    },
+    } catch (error) {
+      console.error('Login failed:', error);
+    }
   },
+}
 };
 </script>
 

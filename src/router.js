@@ -29,9 +29,12 @@ import admin from './views/AppAdmin.vue';
 import statistique from './components/admincomponents/AppStatistique.vue';
 
 
-import store from './store';
 
 import { createRouter, createWebHistory } from 'vue-router';
+
+
+
+
 
 const routes = [
   { path: '/', 
@@ -69,16 +72,18 @@ const routes = [
  { 
    path: '/admin', 
    component: admin,
+   beforeEnter: (to, from, next) => {
+    const userRole = localStorage.getItem('userRole');
+    if (userRole !== 'admin') {
+      next('/');
+    } else {
+      next();
+    }
+  },
    children: [
         { path: 'statistique', component: statistique },
        ],
-       beforeEnter: (to, from, next) => {
-        if (store.getters['auth/isAdmin']) {
-          next();
-        } else {
-          next('/personel/allusers'); 
-        }
-      }
+     
 },
 ];
 

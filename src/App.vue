@@ -40,15 +40,15 @@
                     <li><a class="dropdown-item" href="/personel/profile">profile</a></li>
                     <li><a class="dropdown-item" href="#">parameter</a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li v-if="$store.getters.isloggedIn">
-                        <a class="dropdown-item" @click="logout">Logout</a>
-                      </li>
-                      <li v-else>
-                        <router-link to="/userauth/login" class="dropdown-item">Login</router-link>
-                      </li>
-                      <li v-if="!$store.getters.isloggedIn">
-                        <router-link to="/userauth/register" class="dropdown-item">Register</router-link>
-                      </li>
+                    <li v-if="isLoggedIn">
+                      <button @click="logout" class="btn w-100">Logout</button>
+                    </li>
+                    <li v-else>
+                      <router-link to="/userauth/login" class="dropdown-item">Login</router-link>
+                    </li>
+                    <li v-if="!isLoggedIn">
+                      <router-link to="/userauth/register" class="dropdown-item">Register</router-link>
+                    </li>
                    
                   </ul>
                 </li>
@@ -71,13 +71,13 @@
     <footer v-if="!$route.path.includes('/admin')" class="mt-4 border-top pt-4">
       <div class="container">
         <div class="row">
-          <div class="col-md-2">
+          <div class="col-md-1">
             <router-link class="footer-link" to="/personel/contact">Contact Us</router-link>
           </div>
-          <div class="col-md-2">
+          <div class="col-md-1">
             <router-link class="footer-link" to="/about">About Us</router-link>
           </div>
-          <div class="col-md-2">
+          <div class="col-md-1">
             <router-link class="footer-link" to="/personel/q&a">Q&A</router-link>
           </div>
         </div>
@@ -94,14 +94,46 @@
 </template>
 
 <script>
+import axios from 'axios';
 
 export default {
   name: 'App',
+  data() {
+    return {
+      isLoggedIn: false,
+    };
+  },
+  mounted() {
+    const token = localStorage.getItem('jwt');
+    this.isLoggedIn = token !== null && token !== 'null' && token !== 'undefined';
+  },
+  methods: {
+    async logout() {
+      try {
+        const token = localStorage.getItem('jwt');
+        await axios.post('http://127.0.0.1:8000/api/logout', {}, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        localStorage.removeItem('jwt');
+        this.isLoggedIn = false; 
+        this.$router.push('/userauth/login');
+      } catch (error) {
+        console.error('Logout failed:', error);
+      }
+    },
+  },
+ 
 }
 </script>
 
-<style scoped>
 
+
+<style scoped>
+footer{
+  height: 70px;
+}
   .footer-link{
     text-decoration: none;
     color: black;

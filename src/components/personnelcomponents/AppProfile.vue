@@ -175,6 +175,7 @@ export default {
       }
     }
   },
+  
   formatCreatedAt(created_at) {
       const options = { year: 'numeric', month: 'long', day: 'numeric' };
       const formattedDate = new Date(created_at).toLocaleDateString(undefined, options);

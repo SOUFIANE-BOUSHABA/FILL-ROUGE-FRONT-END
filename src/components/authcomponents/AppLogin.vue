@@ -61,6 +61,7 @@ export default {
       console.log('User:', this.$store.getters.user);
       console.log('Role:', this.$store.getters.role);
       console.log('admin:', this.$store.getters.isAdmin);
+    
       if (userRole === 'user') {
         this.$router.push('/');
       } else if (userRole === 'admin') {
@@ -68,6 +69,10 @@ export default {
       } else {
         console.error('Unknown role:', userRole);
       }
+
+      setTimeout(() => {
+      window.location.reload();
+    }, 100);
     } catch (error) {
       console.error('Login failed:', error);
     }

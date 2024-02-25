@@ -98,10 +98,14 @@ import axios from 'axios';
 
 export default {
   name: 'App',
-
+  data() {
+    return {
+      loggedIn: false,
+    };
+  },
   computed: {
     isLoggedIn() {
-      return this.$store.getters.isLoggedIn;
+      return this.loggedIn || localStorage.getItem('jwt') !== null;
     }
   },
   methods: {
@@ -114,8 +118,12 @@ export default {
           },
         });
         localStorage.removeItem('jwt');
-        this.isLoggedIn = false; 
+        this.loggedIn = false; 
         this.$router.push('/userauth/login');
+
+        setTimeout(() => {
+      window.location.reload();
+    }, 100);
       } catch (error) {
         console.error('Logout failed:', error);
       }

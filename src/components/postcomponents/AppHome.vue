@@ -46,12 +46,17 @@
   </template>
   
   <script>
-  import { mapGetters } from 'vuex';
+import { useAuthStore } from '../../store';
   export default {
     computed: {
-    ...mapGetters('auth', ['user', 'role', 'isLoggedIn']),
+ 
   },
     name: 'AppHome',
+    setup() {
+    const { user, userRole: role } = useAuthStore();
+
+    return { user, role };
+  },
     data() {
       return {
         posts: [

@@ -32,7 +32,7 @@
                   <a class="nav-link dropdown-toggle d-flex align-items-center gap-4" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <div class="d-flex align-items-center gap-2">
                       <font-awesome-icon :icon="['fas', 'user']" />
-                      Soufiane
+                     name
                     </div>
                    
                   </a>

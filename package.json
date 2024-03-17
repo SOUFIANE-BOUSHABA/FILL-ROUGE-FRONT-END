@@ -16,13 +16,13 @@
     "bootstrap": "^5.3.2",
     "core-js": "^3.8.3",
     "jquery": "^3.7.1",
+    "pinia": "^2.1.7",
     "select2": "^4.1.0-beta.0",
     "select2-bootstrap4-theme": "^1.0.0",
     "tinymce": "^5.10.9",
     "tom-select": "^2.3.1",
     "vue": "^3.2.13",
-    "vue-router": "^4.0.0",
-    "vuex": "^4.1.0"
+    "vue-router": "^4.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

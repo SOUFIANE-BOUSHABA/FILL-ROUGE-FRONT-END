@@ -6,6 +6,7 @@
     </div>
 
     <form @submit.prevent="login">
+      <div v-if="errors" class="text-danger">{{ errors }}</div>
       <div class="mt-4 mb-4">
         <input v-model="email" type="email" class="form-control border-0 border-bottom rounded-0" placeholder="Email">
       </div>
@@ -30,54 +31,62 @@
 
 <script>
 import axios from 'axios';
+import { useRouter } from 'vue-router';
+import { useAuthStore } from '../../store';
+import { ref } from 'vue';
 
 export default {
-  data() {
-    return {
-      email: '',
-      password: '',
-      rememberMe: false,
-    };
-  },
-
-  
-  methods: {
-  async login() {
-    try {
-      const response = await axios.post('http://127.0.0.1:8000/api/login', {
-        email: this.email,
-        password: this.password,
-      });
-
-      const user = response.data.user;
-      const userRole = response.data.role.name;
-
-      const token = response.data.token;
-      localStorage.setItem('jwt', token);
-      localStorage.setItem('userRole', userRole);
-
-      this.$store.commit('setUser', { user, userRole  });
-      this.$store.commit('setToken', token);
-      console.log('User:', this.$store.getters.user);
-      console.log('Role:', this.$store.getters.role);
-      console.log('admin:', this.$store.getters.isAdmin);
+  setup() {
+    const router = useRouter();
+    const authStore = useAuthStore();
     
-      if (userRole === 'user') {
-        this.$router.push('/');
-      } else if (userRole === 'admin') {
-        this.$router.push('/admin/statistique');
-      } else {
-        console.error('Unknown role:', userRole);
-      }
+    const email = ref('');
+    const password = ref('');
+    const rememberMe = ref(false);
+    const errors = ref(null); 
+    
+    const login = async () => {
 
-      setTimeout(() => {
-      window.location.reload();
-    }, 100);
-    } catch (error) {
-      console.error('Login failed:', error);
-    }
+      if (!email.value || !password.value) {
+        errors.value = 'Please enter both email and password.';
+        return;
+      }
+      try {
+        
+        const response = await axios.post('http://127.0.0.1:8000/api/login', {
+          email: email.value,
+          password: password.value,
+        });
+
+        const user = response.data.user;
+        const token = response.data.token;
+        const userRole = response.data.role.name;
+
+
+
+        authStore.setUser(user);
+        authStore.setToken(token);
+        authStore.setUserRole(userRole);
+
+        if (userRole === 'user') {
+          router.push('/');
+        } else if (userRole === 'admin') {
+          router.push('/admin/statistique');
+        } else {
+          console.error('Unknown role:', userRole);
+        }
+
+        setTimeout(() => {
+          window.location.reload();
+        }, 100);
+      } catch (error) {
+        console.error('Login failed:', error);
+        errors.value = 'Login failed. Please check your credentials and try again.';
+      }
+    };
+
+    return { login, email, password, rememberMe, errors }; 
   },
-}
 };
 </script>
 

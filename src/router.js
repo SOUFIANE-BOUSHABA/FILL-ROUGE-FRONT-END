@@ -29,6 +29,7 @@ import admin from './views/AppAdmin.vue';
 import statistique from './components/admincomponents/AppStatistique.vue';
 import category from './components/admincomponents/AppCategory.vue';
 import tags from './components/admincomponents/AppTags.vue';
+import users from './components/admincomponents/AppUsers.vue';
 
 
 
@@ -86,6 +87,7 @@ const routes = [
         { path: 'statistique', component: statistique },
         { path: 'category', component: category },
         { path: 'tag', component: tags },
+        { path: 'users', component: users },
        ],
      
 },

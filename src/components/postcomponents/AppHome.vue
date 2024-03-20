@@ -3,9 +3,11 @@
     <div v-for="post in posts" :key="post.id" class="row opacity-75 shadow-sm p-4 mb-4">
       <div class="col-md-2 d-grid">
         <div class="d-flex mt-3 flex-column align-items-center">
-          <font-awesome-icon @click="vote(post.id, 1)" :icon="['fas', 'arrow-alt-circle-up']" />
-          <span class="vote-count">{{ post.votes }}</span>
-          <font-awesome-icon @click="vote(post.id, -1)" :icon="['fas', 'arrow-alt-circle-down']" />
+          <font-awesome-icon v-if="hasVoted(post.topic_votes, 1)" style="color: #007bff;" @click="vote(post.id, 1)" :icon="['fas', 'arrow-alt-circle-up']" />
+          <font-awesome-icon v-else @click="vote(post.id, 1)" :icon="['fas', 'arrow-alt-circle-up']" />
+          <span class="vote-count">{{ post.total_votes }}</span>
+          <font-awesome-icon v-if="hasVoted(post.topic_votes, -1)" style="color: #007bff;" @click="vote(post.id, -1)" :icon="['fas', 'arrow-alt-circle-down']" />
+          <font-awesome-icon v-else @click="vote(post.id, -1)" :icon="['fas', 'arrow-alt-circle-down']" />
         </div>
       </div>
 
@@ -122,6 +124,9 @@ export default {
       return `http://localhost:8000/uploads/${imageUrl}`; 
     },
 
+    hasVoted(topicVotes, value) {
+      return topicVotes && topicVotes.some(vote => vote.user_id === this.auth_id && vote.value === value);
+    },
 
   },
  

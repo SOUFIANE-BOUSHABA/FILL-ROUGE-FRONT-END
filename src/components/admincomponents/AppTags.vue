@@ -115,12 +115,14 @@ export default {
         });
         this.tags.push(response.data);
         this.newTag.name = '';
-        $('#exampleModal').modal('hide');
+        
         this.fetchTags();
       } catch (error) {
         console.error('Error adding tag:', error);
       }
     },
+
+
     async deleteTag(id) {
       try {
         const token = localStorage.getItem('jwt');
@@ -135,6 +137,9 @@ export default {
         console.error('Error deleting tag:', error);
       }
     },
+
+
+
     async fetchTag(id) {
       try {
         const token = localStorage.getItem('jwt');
@@ -148,6 +153,9 @@ export default {
         console.error('Error fetching tag:', error);
       }
     },
+
+
+    
     async updateTag() {
       try {
         const token = localStorage.getItem('jwt');

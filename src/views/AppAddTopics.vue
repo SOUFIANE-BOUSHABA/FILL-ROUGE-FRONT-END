@@ -112,7 +112,7 @@ export default {
             'Content-Type': 'multipart/form-data',
           },
         });
-
+        console.log('Topic created:', response.data);
         const Toast = Swal.mixin({
           toast: true,
           position: "top-end",

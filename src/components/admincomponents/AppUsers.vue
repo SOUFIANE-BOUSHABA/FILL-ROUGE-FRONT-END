@@ -43,7 +43,7 @@
           <div class="modal-body">
             <label for="roleSelect" class="form-label">Select Role:</label>
             <select v-model="selectedRole" class="form-select" id="roleSelect">
-              <option v-for="role in roles" :value="role.id">{{ role.name }}</option>
+              <option v-for="role in roles" :key="role.id" :value="role.id">{{ role.name }}</option>
             </select>
           </div>
           <div class="modal-footer">
@@ -60,7 +60,7 @@
 import axios from 'axios';
 
 export default {
-  name: 'Users',
+  name: 'AppUsers',
   data() {
     return {
       users: [],

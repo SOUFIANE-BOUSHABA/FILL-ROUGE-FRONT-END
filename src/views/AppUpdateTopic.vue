@@ -34,6 +34,7 @@
 </template>
 
 <script>
+ /* global tinymce */
 import TomSelect from 'tom-select';
 import axios from 'axios';
 import Swal from 'sweetalert2';
@@ -142,6 +143,7 @@ export default {
             'Content-Type': 'multipart/form-data',
           },
         });
+        console.log('Topic updated:', response.data);
         const Toast = Swal.mixin({
           toast: true,
           position: "top-end",

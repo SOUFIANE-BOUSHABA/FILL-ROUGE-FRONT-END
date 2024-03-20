@@ -81,7 +81,7 @@
   import axios from 'axios';
   
   export default {
-    name: 'category',
+    name: 'AppCategory',
     data() {
       return {
         categories: [],
@@ -118,7 +118,7 @@
           });
           this.categories.push(response.data);
           this.newCategory.name = '';
-          $('#exampleModal').modal('hide');
+         
           this.fetchCategories();
         } catch (error) {
           console.error('Error adding category:', error);

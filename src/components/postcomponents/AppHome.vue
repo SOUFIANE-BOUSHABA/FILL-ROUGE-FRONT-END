@@ -3,9 +3,9 @@
     <div v-for="post in posts" :key="post.id" class="row opacity-75 shadow-sm p-4 mb-4">
       <div class="col-md-2 d-grid">
         <div class="d-flex mt-3 flex-column align-items-center">
-          <font-awesome-icon :icon="['fas', 'circle-up']" />
-          <span class="vote-count">10</span>
-          <font-awesome-icon :icon="['fas', 'circle-down']" />
+          <font-awesome-icon @click="vote(post.id, 1)" :icon="['fas', 'arrow-alt-circle-up']" />
+          <span class="vote-count">{{ post.votes }}</span>
+          <font-awesome-icon @click="vote(post.id, -1)" :icon="['fas', 'arrow-alt-circle-down']" />
         </div>
       </div>
 
@@ -98,6 +98,22 @@ export default {
       }
     },
 
+    async vote(topicId, value) {
+      try {
+        const token = localStorage.getItem('jwt');
+        await axios.post('http://127.0.0.1:8000/api/voteTopic', {
+          topic_id: topicId,
+          value: value
+        }, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        this.fetchTopics();
+      } catch (error) {
+        console.error('Error voting on topic:', error);
+      }
+    },
 
     formatCreatedAt(created_at) {
       return moment(created_at).fromNow();
@@ -105,6 +121,7 @@ export default {
     showImg(imageUrl) {
       return `http://localhost:8000/uploads/${imageUrl}`; 
     },
+
 
   },
  

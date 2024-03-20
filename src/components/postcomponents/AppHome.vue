@@ -30,6 +30,7 @@
           </div>
          
           <p v-html="post.details"></p>
+          <img :src="showImg(post.image_url)" alt="Post Image" class="img-fluid mb-3"> 
           <div class="tags">
             <span v-for="(tag, index) in post.tags" :key="index" class="tag">#{{ tag.name }}</span>
           </div>
@@ -101,7 +102,9 @@ export default {
     formatCreatedAt(created_at) {
       return moment(created_at).fromNow();
     },
-
+    showImg(imageUrl) {
+      return `http://localhost:8000/uploads/${imageUrl}`; 
+    },
 
   },
  

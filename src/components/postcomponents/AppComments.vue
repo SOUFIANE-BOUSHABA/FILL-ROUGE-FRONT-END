@@ -117,7 +117,7 @@
                     <ul  class="dropdown-menu dropdown-menu-end">
                         <li v-if="post.user.id == auth_id" ><a class="dropdown-item" @click="valider(comment.id)">Valider</a></li>
                         <li v-if="comment.user.id == auth_id"><a class="dropdown-item" @click="deleteComment(comment.id)">Delete</a></li>
-                        <li v-if="comment.user.id == auth_id"><router-link class="dropdown-item" :to="'/updateComment/' + comment.id">Update</router-link></li>
+                        <li v-if="comment.user.id == auth_id"><a class="dropdown-item"  @click="fetchComment(comment.id)"  data-bs-toggle="modal" data-bs-target="#updateModal">Update</a></li>
                     </ul>
                     </div>
 
@@ -138,6 +138,30 @@
           </div>
         </div>
       </div>
+          <!-- Modal for Update -->
+          <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true" ref="updateModal">
+
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h1 class="modal-title fs-5" id="updateModalLabel">Update Comment</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <form @submit.prevent="updateComment" class="form">
+                    <div class="mb-3">
+                    <label for="updateName" class="form-label">Comment</label>
+                    <textarea  class="form-control" v-model="selectedComment.details" required> </textarea>
+
+                    </div>
+                    <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+                </form>
+                </div>
+            </div>
+            </div>
+            </div>
     </div>
   </template>
   
@@ -148,6 +172,10 @@
     name: 'AppComments',
     data() {
       return {
+        selectedComment: {
+          id: null,
+          details: ''
+        },
         details: '',
         auth_id: null,
         postt: [],
@@ -213,6 +241,38 @@
         }
       },
 
+
+      async fetchComment(commentId) {
+        try {
+            const token = localStorage.getItem('jwt');
+            const response = await axios.get(`http://127.0.0.1:8000/api/comments/${commentId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            });
+            this.selectedComment.id = response.data.comment.id;
+            this.selectedComment.details = response.data.comment.text;
+            console.log(this.selectedComment.id, this.selectedComment.details )
+        } catch (error) {
+            console.error('Error fetching comment:', error);
+        }
+        },
+
+        async updateComment() {
+          try {
+            const token = localStorage.getItem('jwt');
+            await axios.post(`http://127.0.0.1:8000/api/commentUpdate/${this.selectedComment.id}`, {
+            text: this.selectedComment.details,
+            }, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            });
+            window.location.reload();
+            } catch (error) {
+            console.error('Error updating comment:', error);
+            }
+        },
 
     async vote(topicId, value) {
       try {

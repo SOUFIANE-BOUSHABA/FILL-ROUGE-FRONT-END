@@ -4,6 +4,7 @@ import AppInterface from './views/AppPost.vue';
 import Home from './components/postcomponents/AppHome.vue';
 import ExploreTopics from './components/postcomponents/AppExploreTopics.vue';
 import MyTopics from './components/postcomponents/AppMyTopics.vue';
+import commentes from './components/postcomponents/AppComments.vue';
 import ErrorView from './components/postcomponents/AppError404.vue';
 
 
@@ -47,6 +48,7 @@ const routes = [
     { path: '', component: Home },
     { path: 'explore', component: ExploreTopics },
     { path: 'MyTopics', component: MyTopics },
+    { path: 'commentes/:id', component: commentes },
     { path: '/:pathMatch(.*)*', component: ErrorView  },
   ],
 },

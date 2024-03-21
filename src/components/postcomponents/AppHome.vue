@@ -44,10 +44,10 @@
             </div>
             <div class="d-flex gap-4 align-items-center">
               <span>{{ formatCreatedAt(post.created_at) }}</span> 
-              <div class="d-flex gap-2 align-items-center">
+              <router-link :to="'/commentes/' + post.id" class="d-flex gap-2 align-items-center">
                 <font-awesome-icon class="mt-1" :icon="['fas', 'message']" />
                 <span>{{ post.comments }}</span>
-              </div>
+              </router-link>
             </div>
           </div>
         </div>

@@ -92,14 +92,14 @@
              
                     <font-awesome-icon
                         
-                        @click="vote(post.id, 1)"
+                        @click="voteComment(comment.id, 1)"
                         :icon="['fas', 'arrow-alt-circle-up']"
                     />
-                    <span class="vote-count">{{ post.total_votes }}</span>
+                    <span class="vote-count">0</span>
                     
                     <font-awesome-icon
                         
-                        @click="vote(post.id, -1)"
+                        @click="voteComment(comment.id, -1)"
                         :icon="['fas', 'arrow-alt-circle-down']"
                     />
                     </div>
@@ -279,6 +279,23 @@
         const token = localStorage.getItem('jwt');
         await axios.post('http://127.0.0.1:8000/api/voteTopic', {
           topic_id: topicId,
+          value: value
+        }, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        this.fetchTopic(this.$route.params.id);
+      } catch (error) {
+        console.error('Error voting on topic:', error);
+      }
+    },
+
+    async voteComment(commentID, value) {
+      try {
+        const token = localStorage.getItem('jwt');
+        await axios.post('http://127.0.0.1:8000/api/commentTopic', {
+          comment_id: commentID,
           value: value
         }, {
           headers: {

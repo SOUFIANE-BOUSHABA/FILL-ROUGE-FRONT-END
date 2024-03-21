@@ -76,13 +76,14 @@
             
             </div>
             <!-- Display comments -->
-            <div class="mt-4">
-              <div v-for="comment in post.comments" :key="comment.id" class="comment-container mt-4">
-                <div class="d-flex justify-content-between mb-2">
+            <div class="mt-4 ">
+              <div v-for="comment in post.comments" :key="comment.id" class="comment-container mt-4 ">
+                <div class="d-flex justify-content-between mb-2 p-2">
                         <div class="d-flex gap-4 align-items-center">
                         <font-awesome-icon :icon="['fas', 'user']" />
-                        <span>
+                        <span class="d-flex gap-4">
                             <span class="my-custom-color ">{{ comment.user.first_name }} {{ comment.user.last_name }}</span>
+                            <span v-if="comment.validation == 1" class="badge text-bg-success ">valider</span>
                         </span>
                         </div>
 
@@ -90,15 +91,23 @@
                   <div class="d-flex gap-4">
                     <div class="d-flex gap-2 align-items-center">
              
-                    <font-awesome-icon
-                        
+                      <font-awesome-icon
+                        v-if="hasVotedComment(comment.comment_votes, 1)"
+                        style="color: #007bff;"
                         @click="voteComment(comment.id, 1)"
                         :icon="['fas', 'arrow-alt-circle-up']"
-                    />
-                    <span class="vote-count">0</span>
+                      />
+                    <font-awesome-icon v-else @click="voteComment(comment.id, 1)" :icon="['fas', 'arrow-alt-circle-up']"  />
+                    <span class="vote-count">{{ comment.total_votes_comments}}</span>
                     
                     <font-awesome-icon
-                        
+                        v-if="hasVotedComment(comment.comment_votes, -1)"
+                        style="color: #007bff;"
+                        @click="voteComment(comment.id, -1)"
+                        :icon="['fas', 'arrow-alt-circle-down']"
+                      />
+                    <font-awesome-icon
+                        v-else
                         @click="voteComment(comment.id, -1)"
                         :icon="['fas', 'arrow-alt-circle-down']"
                     />
@@ -123,8 +132,8 @@
 
                   </div>
                 </div>
-                <div class="mb-2">{{ comment.text }}</div>
-                <div>{{ formatCreatedAt(comment.created_at) }}</div>
+                <div class="mb-2 p-2">{{ comment.text }}</div>
+                <div class="fw-bold">{{ formatCreatedAt(comment.created_at) }}</div>
               </div>
             </div>
 
@@ -192,6 +201,7 @@
           });
           this.postt = [response.data.topic];
           this.auth_id = response.data.user_id;
+          console.log(response.data);
         } catch (error) {
           console.error('Error fetching topic:', error);
         }
@@ -304,9 +314,22 @@
         });
         this.fetchTopic(this.$route.params.id);
       } catch (error) {
-        console.error('Error voting on topic:', error);
+        console.error('Error voting on comment:', error);
       }
     },
+
+    async valider(commentID) {
+      try {
+        const token = localStorage.getItem('jwt');
+        await axios.post('http://127.0.0.1:8000/api/validerComment',{comment_id : commentID}, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        this.fetchTopic(this.$route.params.id);
+      }catch(error){
+        console.error('Error validation on topic:', error);
+      }},
 
     formatCreatedAt(created_at) {
       return moment(created_at).fromNow();
@@ -318,6 +341,9 @@
 
     hasVoted(topicVotes, value) {
       return topicVotes && topicVotes.some(vote => vote.user_id === this.auth_id && vote.value === value);
+    },
+    hasVotedComment(commentVotes, value) {
+      return commentVotes && commentVotes.some(vote => vote.user_id === this.auth_id && vote.value === value);
     },
 
 

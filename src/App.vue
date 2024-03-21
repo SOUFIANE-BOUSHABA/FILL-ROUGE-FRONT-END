@@ -68,7 +68,7 @@
 
 
 
-    <footer v-if="!$route.path.includes('/admin')" class="mt-4 border-top pt-4">
+    <footer v-if="!$route.path.includes('/admin')" class=" border-top pt-4">
       <div class="container">
         <div class="row">
           <div class="col-md-1">

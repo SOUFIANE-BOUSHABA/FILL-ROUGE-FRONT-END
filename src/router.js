@@ -18,6 +18,7 @@ import personnel from './views/AppPersonnel.vue';
 import MyAnswers from './components/personnelcomponents/AppMyAnsewrs.vue';
 import allusers from './components/personnelcomponents/AppUsers.vue';
 import profile from './components/personnelcomponents/AppProfile.vue';
+import EditProfile from './components/personnelcomponents/AppEditProfile.vue';
 import contact from './components/personnelcomponents/AppContact.vue';
 import QandA from './components/personnelcomponents/AppQ&A.vue';
 
@@ -68,6 +69,7 @@ const routes = [
           { path: 'MyAnswers', component: MyAnswers },
           { path: 'allusers', component: allusers },
           { path: 'profile', component: profile },
+          { path: 'EditProfile', component: EditProfile },
           { path: 'contact', component: contact },
           { path: 'q&a', component: QandA },
         ],

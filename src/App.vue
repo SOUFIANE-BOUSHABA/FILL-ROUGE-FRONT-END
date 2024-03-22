@@ -38,7 +38,7 @@
                   </a>
                   <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="/personel/profile">profile</a></li>
-                    <li><a class="dropdown-item" href="#">parameter</a></li>
+                    <li><a class="dropdown-item" href="/personel/EditProfile">parameter</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li v-if="isLoggedIn">
                       <button @click="logout" class="btn w-100">Logout</button>

@@ -1,96 +1,144 @@
 <template>
-    <div class="mt-4 ">
-      <div class="container" >
-        <div  v-for="post in posts" :key="post.id" class="row opacity-75 shadow-sm p-4 mb-4" >
-          <div class="col-md-2 d-grid ">
-            <div class="d-flex mt-3 flex-column align-items-center">
-              <font-awesome-icon :icon="['fas', 'circle-up']" />
-              <span class="vote-count">10</span>
-              <font-awesome-icon :icon="['fas', 'circle-down']" />
+  <div class="mt-4">
+    <div v-for="post in posts" :key="post.id" class="row opacity-75 shadow-sm p-4 mb-4">
+      <div class="col-md-2 d-grid">
+        <div class="d-flex mt-3 flex-column align-items-center">
+          <font-awesome-icon v-if="hasVoted(post.topic_votes, 1)" style="color: #007bff;" @click="vote(post.id, 1)" :icon="['fas', 'arrow-alt-circle-up']" />
+          <font-awesome-icon v-else @click="vote(post.id, 1)" :icon="['fas', 'arrow-alt-circle-up']" />
+          <span class="vote-count">{{ post.total_votes }}</span>
+          <font-awesome-icon v-if="hasVoted(post.topic_votes, -1)" style="color: #007bff;" @click="vote(post.id, -1)" :icon="['fas', 'arrow-alt-circle-down']" />
+          <font-awesome-icon v-else @click="vote(post.id, -1)" :icon="['fas', 'arrow-alt-circle-down']" />
+        </div>
+      </div>
+
+      <div class="col-md-10">
+        <div>
+          <div class="d-flex justify-content-between">
+            <h2>{{ post.title }}</h2>
+
+            <div  v-if="post.user.id == auth_id " class="dropdown">
+              <font-awesome-icon
+                class="dropdown-toggle"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                :icon="['fas', 'ellipsis-vertical']"
+              />
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" @click="deletePost(post.id)">Delete</a></li>
+                <li><router-link class="dropdown-item" :to="'/updateTopic/' + post.id">Update</router-link></li>
+              </ul>
             </div>
           </div>
-  
-          <div class="col-md-10">
-            <div>
-              <h2>{{ post.title }}</h2>
-              <p>{{ post.content }}</p>
-  
-              <hr />
-  
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="d-flex gap-4 align-items-center">
-                  <font-awesome-icon :icon="['fas', 'user']" />
-                  <span>Posted by <span class="my-custom-color ">{{ post.author }}</span> </span>
-                </div>
-  
-                <div class="d-flex gap-4 align-items-center">
-                  <span>{{ post.timeAgo }}</span>
-                  <div class="d-flex gap-2 align-items-center">
-                    <font-awesome-icon class="mt-1" :icon="['fas', 'message']" />
-                    <span>{{ post.comments }}</span>
-                  </div>
-                </div>
-              </div>
-  
+         
+          <p v-html="post.details"></p>
+          <img :src="showImg(post.image_url)" alt="Post Image" class="img-fluid mb-3"> 
+          <div class="tags">
+            <span v-for="(tag, index) in post.tags" :key="index" class="tag">#{{ tag.name }}</span>
+          </div>
+          <hr />
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex gap-4 align-items-center">
+              <font-awesome-icon :icon="['fas', 'user']" />
+              <span>Posted by <span class="my-custom-color">{{ post.user.first_name }} {{ post.user.last_name }}</span></span>
+            </div>
+            <div class="d-flex gap-4 align-items-center">
+              <span>{{ formatCreatedAt(post.created_at) }}</span> 
+              <router-link :to="'/commentes/' + post.id" class="d-flex gap-2 align-items-center">
+                <font-awesome-icon class="mt-1" :icon="['fas', 'message']" />
+                <span>{{ post.comments }}</span>
+              </router-link>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </template>
-  
-  <script>
-  export default {
-    name: 'AppHome',
-    data() {
-      return {
-        posts: [
-            {
-            id: 1,
-            title: 'What is Docker?',
-            content: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequuntur labore molestiae quo sint qui delectus voluptates impedit quas dolores, in explicabo quis aperiam quos maiores repellendus ea temporibus illum perspiciatis!',
-            author: 'Soufiane Boushaba',
-            timeAgo: '2 hours ago',
-            comments: 10,
-        },
-        {
-            id: 2,
-            title: 'Introduction to Vue.js',
-            content: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequuntur labore molestiae quo sint qui delectus voluptates impedit quas dolores, in explicabo quis aperiam quos maiores repellendus ea temporibus illum perspiciatis!',
-            author: 'John Doe',
-            timeAgo: '1 day ago',
-            comments: 15,
-        },
-        {
-            id: 3,
-            title: 'Building a RESTful API with Node.js',
-            content: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequuntur labore molestiae quo sint qui delectus voluptates impedit quas dolores, in explicabo quis aperiam quos maiores repellendus ea temporibus illum perspiciatis!',
-            author: 'Jane Smith',
-            timeAgo: '3 days ago',
-            comments: 8,
-        },
-        {
-            id: 4,
-            title: 'CSS Flexbox Basics',
-            content: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequuntur labore molestiae quo sint qui delectus voluptates impedit quas dolores, in explicabo quis aperiam quos maiores repellendus ea temporibus illum perspiciatis!',
-            author: 'Alice Johnson',
-            timeAgo: '1 week ago',
-            comments: 20,
-        },
-        {
-            id: 5,
-            title: 'JavaScript ES6 Features',
-            content: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequuntur labore molestiae quo sint qui delectus voluptates impedit quas dolores, in explicabo quis aperiam quos maiores repellendus ea temporibus illum perspiciatis!',
-            author: 'Bob Anderson',
-            timeAgo: '2 weeks ago',
-            comments: 12,
-        },
-        ],
-      };
+  </div>
+</template>
+
+<script>
+import axios from 'axios';
+import moment from 'moment';
+export default {
+  name: 'AppHome',
+  data() {
+    return {
+      posts: [],
+      auth_id: null,
+    };
+  },
+  mounted() {
+    this.fetchTopics();
+  },
+  methods: {
+    async fetchTopics() {
+      try {
+        const token = localStorage.getItem('jwt');
+        const response = await axios.get('http://127.0.0.1:8000/api/Exploretopics', {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+        this.posts = response.data.topics;
+        this.auth_id = response.data.user_id;
+      } catch (error) {
+        console.error('Error fetching topics:', error);
+      }
     },
-  };
-  </script>
-  
-  <style scoped>
-  </style>
-  
+
+    async deletePost(id) {
+      try {
+        const token = localStorage.getItem('jwt');
+        await axios.delete(`http://127.0.0.1:8000/api/topics/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        this.fetchTopics();
+      } catch (error) {
+        console.error('Error deleting post:', error);
+      }
+    },
+
+    async vote(topicId, value) {
+      try {
+        const token = localStorage.getItem('jwt');
+        await axios.post('http://127.0.0.1:8000/api/voteTopic', {
+          topic_id: topicId,
+          value: value
+        }, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        this.fetchTopics();
+      } catch (error) {
+        console.error('Error voting on topic:', error);
+      }
+    },
+
+    formatCreatedAt(created_at) {
+      return moment(created_at).fromNow();
+    },
+    showImg(imageUrl) {
+      return `http://localhost:8000/uploads/${imageUrl}`; 
+    },
+
+    hasVoted(topicVotes, value) {
+      return topicVotes && topicVotes.some(vote => vote.user_id === this.auth_id && vote.value === value);
+    },
+
+  },
+ 
+};
+</script>
+
+<style scoped>
+.tag {
+  background-color: #007bff; 
+  color: #fff; 
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-right: 4px;
+}
+</style>

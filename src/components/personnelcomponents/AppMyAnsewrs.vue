@@ -1,101 +1,96 @@
 <template>
-    <div class="mt-4">
-      <div class="container">
-        <div v-for="answer in answers" :key="answer.id" class="row opacity-75 shadow p-4 mb-4">
-          <div class="col-md-12">
-            <div>
-              <p class="mb-4">{{ answer.content }}</p>
-              <hr />
-  
-              <div class="d-flex justify-content-between align-items-center">
-                <div>
-                  <span>{{ answer.timeAgo }}</span>
-                </div>
-  
-                <div class="d-flex gap-3 opacity-75">
-                  <font-awesome-icon  :icon="['fas', 'trash-can']" class="cursor-pointer"  @click="deleteAnswer(answer.id)" />
-  
-                  <font-awesome-icon  :icon="['fas', 'edit']"  class="cursor-pointer" @click="editAnswer(answer.id)" />
-  
-                  <font-awesome-icon :icon="['fas', 'eye']"  class="cursor-pointer"  @click="viewAnswer(answer.id)" />
-                </div>
+  <div class="mt-4">
+    <div class="container">
+      <div v-for="comment in comments" :key="comment.id" class="row opacity-75 shadow p-4 mb-4">
+        <div class="col-md-12">
+          <div>
+            <p class="mb-4">{{ comment.text }}</p>
+            <hr />
+
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <span>{{ formatCreatedAt(comment.created_at) }}</span>
+              </div>
+
+              <div class="d-flex gap-3 opacity-75">
+                <font-awesome-icon  :icon="['fas', 'trash-can']" class="cursor-pointer"  @click="deleteComment(comment.id)" />
+
+                <router-link :to="'/commentes/' + comment.topic.id">
+  <font-awesome-icon :icon="['fas', 'eye']" class="cursor-pointer" />
+</router-link>
+
+
+
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </template>
-  
-  <script>
-  export default {
-    name: 'AppHome',
-    data() {
-      return {
-        answers: [
-        {
-            id: 1,
-            content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-            timeAgo: '2 hours ago',
-        },
-        {
-            id: 2,
-            content: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-            timeAgo: '1 day ago',
-        },
-        {
-            id: 3,
-            content: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-            timeAgo: '3 days ago',
-        },
+  </div>
+</template>
 
-        {
-            id: 4,
-            content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-            timeAgo: '2 hours ago',
-        },
-        {
-            id: 5,
-            content: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-            timeAgo: '1 day ago',
-        },
-        {
-            id: 6,
-            content: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-            timeAgo: '3 days ago',
-        },
-        {
-            id: 7,
-            content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-            timeAgo: '2 hours ago',
-        },
-        {
-            id: 8,
-            content: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-            timeAgo: '1 day ago',
-        },
-        {
-            id: 9,
-            content: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-            timeAgo: '3 days ago',
-        },
-        ],
-      };
+<script>
+import axios from 'axios';
+import moment  from 'moment';
+
+export default {
+  name: 'AppHome',
+  data() {
+    return {
+      comments: [],
+      path : ''
+    };
+  },
+  mounted() {
+    this.fetchComments();
+  },
+  methods: {
+   async fetchComments() {
+
+      try {
+        const token = localStorage.getItem('jwt');
+        const response = await axios.get('http://127.0.0.1:8000/api/comments', {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          this.comments = response.data.comment;
+          console.log(this.comments);
+
+      } catch (error) {
+        console.error('Error fetching comments:', error);
+      }
     },
-    methods: {
-      deleteAnswer(answerId) {
-        console.log(`Deleting answer with ID: ${answerId}`);
-      },
-      editAnswer(answerId) {
-        console.log(`Editing answer with ID: ${answerId}`);
-      },
-      viewAnswer(answerId) {
-        console.log(`Viewing answer with ID: ${answerId}`);
-      },
+
+    formatCreatedAt(created_at) {
+      return moment(created_at).fromNow();
     },
-  };
-  </script>
-  
-  <style scoped>
-  </style>
-  
+
+    async deleteComment(id) {
+        try {
+          const token = localStorage.getItem('jwt');
+          await axios.delete(`http://127.0.0.1:8000/api/comments/${id}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          this.fetchComments();
+        } catch (error) {
+          console.error('Error deleting comments:', error);
+        }
+      },
+
+
+    editComment(commentId) {
+      console.log(`Editing comment with ID: ${commentId}`);
+    },
+    viewComment(commentId) {
+      console.log(`Viewing comment with ID: ${commentId}`);
+    },
+  },
+};
+</script>
+
+<style scoped>
+</style>

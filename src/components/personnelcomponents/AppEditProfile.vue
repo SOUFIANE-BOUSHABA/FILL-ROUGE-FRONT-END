@@ -34,6 +34,18 @@
                   <label class="small mb-1" for="buyMeACoffee">Buy Me a Coffee URL</label>
                   <input v-model="user.url_pay_me_coffee" type="text" class="form-control" id="buyMeACoffee" placeholder="Enter your Buy Me a Coffee URL">
                 </div>
+                <div class="form-group mb-3">
+                  <label class="small mb-1" for="hackerrank_link">Hackerrank Link</label>
+                  <input v-model="user.hackerrank_link" type="text" class="form-control" id="hackerrank_link" placeholder="Enter your Hackerrank Link">
+                </div>
+                <div class="form-group mb-3">
+                  <label class="small mb-1" for="github_link">Github Link</label>
+                  <input v-model="user.github_link" type="text" class="form-control" id="github_link" placeholder="Enter your Github Link">
+                </div>
+                <div class="form-group mb-3">
+                  <label class="small mb-1" for="portfolio_link">Portfolio Link</label>
+                  <input v-model="user.portfolio_link" type="text" class="form-control" id="portfolio_link" placeholder="Enter your Portfolio Link">
+                </div>
                 <button type="submit" class="btn btn-primary">Save changes</button>
               </div>
             </div>
@@ -57,6 +69,9 @@ export default {
         avatar: null,
         url_pay_me_coffee: '', 
         avatarFile: null,
+        hackerrank_link: '',
+        github_link: '',    
+        portfolio_link: '', 
       },
     };
   },
@@ -81,11 +96,13 @@ export default {
         formData.append('last_name', this.user.last_name);
         formData.append('email', this.user.email);
         formData.append('buyMeACoffee', this.user.url_pay_me_coffee);
+        formData.append('hackerrank_link', this.user.hackerrank_link);
+        formData.append('github_link', this.user.github_link);
+        formData.append('portfolio_link', this.user.portfolio_link);
         if (this.user.avatarFile) {
           formData.append('avatar', this.user.avatarFile);
         }
         console.log(formData.get('avatar'));
- // Log FormData
         const token = localStorage.getItem('jwt');
         await axios.post('http://127.0.0.1:8000/api/user/update', formData, {
           headers: {
@@ -98,6 +115,9 @@ export default {
         console.error("Error saving changes:", error);
       }
     },
+
+
+
     showImg(imageUrl) {
       return `http://localhost:8000/uploads/${imageUrl}`; 
     },

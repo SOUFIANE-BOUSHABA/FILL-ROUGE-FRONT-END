@@ -16,8 +16,8 @@
                 <font-awesome-icon  :icon="['fas', 'trash-can']" class="cursor-pointer"  @click="deleteComment(comment.id)" />
 
                 <router-link :to="'/commentes/' + comment.topic.id">
-  <font-awesome-icon :icon="['fas', 'eye']" class="cursor-pointer" />
-</router-link>
+                  <font-awesome-icon :icon="['fas', 'eye']" class="cursor-pointer" />
+                </router-link>
 
 
 

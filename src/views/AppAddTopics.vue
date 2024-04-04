@@ -82,10 +82,11 @@ export default {
         this.tags = response.data;
         new TomSelect("#tags", {
           maxItems: 3,
+
           options: this.tags.map(tag => ({ value: tag.id, text: tag.name }))
         });
       } catch (error) {
-        console.error('Error fetching tags:', error);
+        console.error('Error fetching tages:', error);
       }
     },
 
@@ -96,7 +97,7 @@ export default {
 
 
 
-    
+
 
     async submitForm() {
       try {

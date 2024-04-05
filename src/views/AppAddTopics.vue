@@ -70,6 +70,13 @@ export default {
     },
 
 
+    handleImageUpload(event) {
+      this.image = event.target.files[0];
+    },
+
+
+
+
 
     async fetchTags() {
       try {
@@ -89,13 +96,6 @@ export default {
         console.error('Error fetching tages:', error);
       }
     },
-
-
-    handleImageUpload(event) {
-      this.image = event.target.files[0];
-    },
-
-
 
 
 

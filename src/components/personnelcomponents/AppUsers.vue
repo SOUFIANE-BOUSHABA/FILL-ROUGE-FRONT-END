@@ -36,9 +36,21 @@
         </div>
       </div>
     </div>
+    <div class="container  mt-4">
+      <ul class="pagination justify-content-end">
+        <li class="page-item" :class="{ disabled: currentPage === 1 }">
+          <a class="page-link" href="#" @click.prevent="prevPage">&laquo;</a>
+        </li>
+        <li class="page-item" v-for="pageNumber in totalPages" :key="pageNumber" :class="{ active: currentPage === pageNumber }">
+          <a class="page-link" href="#" @click.prevent="gotoPage(pageNumber)">{{ pageNumber }}</a>
+        </li>
+        <li class="page-item" :class="{ disabled: currentPage === totalPages }">
+          <a class="page-link" href="#" @click.prevent="nextPage">&raquo;</a>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
-
 
 
 <script>
@@ -47,11 +59,14 @@ import moment from 'moment';
 
 export default {
   name: 'AppUsers',
+
   data() {
     return {
       searchQuery: '',
       sortBy: 'name',
       users: [],
+      currentPage: 1,
+      perPage: 9,
     };
   },
   mounted() {
@@ -85,25 +100,40 @@ export default {
       }
     },
 
-
+    prevPage() {
+      if (this.currentPage > 1) {
+        this.currentPage--;
+      }
+    },
+    nextPage() {
+      if (this.currentPage < this.totalPages) {
+        this.currentPage++;
+      }
+    },
+    gotoPage(pageNumber) {
+      this.currentPage = pageNumber;
+    },
   },
   computed: {
-    paginatedUsers() {
-      let filteredUsers = this.users.filter((user) =>
+    filteredUsers() {
+      return this.users.filter((user) =>
         (user.first_name + ' ' + user.last_name).toLowerCase().includes(this.searchQuery.toLowerCase())
       );
+    },
 
-      if (this.sortBy === 'name') {
-        filteredUsers.sort((a, b) => (a.first_name + ' ' + a.last_name).localeCompare(b.first_name + ' ' + b.last_name));
-      } else if (this.sortBy === 'postCount') {
-        filteredUsers.sort((a, b) => b.postCount - a.postCount);
-      }
+    paginatedUsers() {
+      const startIndex = (this.currentPage - 1) * this.perPage;
+      const endIndex = startIndex + this.perPage;
+      return this.filteredUsers.slice(startIndex, endIndex);
+    },
 
-      return filteredUsers;
+    totalPages() {
+      return Math.ceil(this.filteredUsers.length / this.perPage);
     },
   },
 };
 </script>
+
 
 <style scoped>
 .images {

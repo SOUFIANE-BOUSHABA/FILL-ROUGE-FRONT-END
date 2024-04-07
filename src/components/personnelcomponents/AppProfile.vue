@@ -174,7 +174,11 @@ export default {
       this.selectedFilter = filter;
     },
     showImg(imageUrl) {
-      return `http://localhost:8000/uploads/${imageUrl}`;
+      if (imageUrl) {
+        return `http://localhost:8000/uploads/${imageUrl}`;
+      } else {
+        return require('@/assets/user.jpg');
+      }
     },
   },
 };

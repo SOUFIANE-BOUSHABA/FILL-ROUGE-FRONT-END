@@ -21,7 +21,9 @@
             </div>
 
             <div>
-              <h6 class="my-custom-color">{{ user.first_name }} {{ user.last_name }}</h6>
+              <h6 class="my-custom-color" >
+                <router-link :to="'/personel/profile/' + user.id">{{ user.first_name }} {{ user.last_name }}</router-link>
+              </h6>
               <div class="align-items-center mb-2">
                 <div class="mb-2">
                   <span class="opacity-50">{{ user.topics_count }} topics</span>
@@ -138,6 +140,9 @@ export default {
 <style scoped>
 .images {
   width: 100px;
+}
+a {
+  text-decoration: none;
 }
 .images img {
   width: 100%;

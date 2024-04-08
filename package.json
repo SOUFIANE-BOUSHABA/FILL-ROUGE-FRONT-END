@@ -8,10 +8,14 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^41.2.1",
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
     "@fortawesome/free-brands-svg-icons": "^6.5.1",
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@fortawesome/vue-fontawesome": "^3.0.5",
+    "@progress/kendo-editor-vue-wrapper": "^2024.1.319",
+    "@progress/kendo-vue-editor": "^4.3.2",
+    "@tinymce/tinymce-vue": "^5.1.1",
     "axios": "^1.6.7",
     "bootstrap": "^5.3.3",
     "bootstrap-vue": "^2.23.1",
@@ -21,6 +25,7 @@
     "pinia": "^2.1.7",
     "select2": "^4.1.0-beta.0",
     "select2-bootstrap4-theme": "^1.0.0",
+    "summernote": "^0.8.20",
     "sweetalert2": "^11.10.6",
     "tinymce": "^5.10.9",
     "tom-select": "^2.3.1",

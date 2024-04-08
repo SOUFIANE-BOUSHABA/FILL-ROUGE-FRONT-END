@@ -12,8 +12,6 @@ export const useAuthStore = defineStore({
   getters: {
     isLoggedIn: (state) => state.token !== null,
     isAdmin: (state) => state.userRole === 'admin',
-    getEmail: (state) => state.email,
-    getPassword: (state) => state.password,
   },
   actions: {
     setUser(user) {

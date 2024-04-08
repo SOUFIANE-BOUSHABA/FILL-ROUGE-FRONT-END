@@ -32,12 +32,12 @@
                   <a class="nav-link dropdown-toggle d-flex align-items-center gap-4" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <div class="d-flex align-items-center gap-2">
                       <font-awesome-icon :icon="['fas', 'user']" />
-                     name
+                     {{user.first_name}}
                     </div>
                    
                   </a>
                   <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="/personel/profile">profile</a></li>
+                    <li><router-link :to="'/personel/profile/' +user.id" class="dropdown-item">profile</router-link></li>
                     <li><a class="dropdown-item" href="/personel/EditProfile">parameter</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li v-if="isLoggedIn">
@@ -101,6 +101,7 @@ export default {
   data() {
     return {
       loggedIn: false,
+      user: '' ,
     };
   },
   computed: {
@@ -108,7 +109,32 @@ export default {
       return this.loggedIn || localStorage.getItem('jwt') !== null;
     }
   },
+
+  async mounted() {
+
+  this.fetchUserData(); 
+  },
+
   methods: {
+    async fetchUserData() {
+      try {
+        const token = localStorage.getItem('jwt');
+        const userResponse = await axios.get('http://127.0.0.1:8000/api/user', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        this.user= userResponse.data.user;
+        console.log('User:', this.user);
+      } catch (error) {
+        if (error.response && error.response.status === 401) {
+          this.$router.push('/userauth/login');
+        } else {
+          console.error('Error fetching user data:', error);
+        }
+      }
+    },
+
     async logout() {
       try {
         const token = localStorage.getItem('jwt');
@@ -129,6 +155,7 @@ export default {
       }
     },
   },
+  
 };
 </script>
 

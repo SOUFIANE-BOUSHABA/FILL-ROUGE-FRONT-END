@@ -8,7 +8,10 @@
         <div class="opacity-75">
           <h4 class="my-custom-color ">{{ user.first_name }} {{ user.last_name }}</h4>
           <p class="mb-2"> <font-awesome-icon class="opacity-50" :icon="['fas', 'cake-candles']" /> Member since: {{ formatCreatedAt(user.created_at) }}</p>
-          <p class="mb-2"> <font-awesome-icon class="opacity-50" :icon="['fas', 'clock']" /> Last Seen: {{ user.lastSeen }}</p>
+          <p class="mb-2"> <font-awesome-icon class="opacity-50" :icon="['fas', 'clock']" />
+                  <small v-if="user.last_online == null"> <span class="enligne"></span> en ligne</small>
+                  <small v-else>Last Online: {{ formatLastOnline(user.last_online) }}</small>
+          </p>
           <div class="d-flex gap-2 mb-4">
             <a v-if="user.hackerrank_link" :href="user.hackerrank_link" target="_blank">
               <svg  class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"  width="24" height="24" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
@@ -103,6 +106,7 @@
 
 <script>
 import axios from 'axios';
+import moment from 'moment';
 
 export default {
   watch: {},
@@ -116,15 +120,16 @@ export default {
     };
   },
   async mounted() {
-  await this.fetchUserData(); 
+
+  await this.fetchUserData(this.$route.params.id); 
   this.fetchUserPosts();
   this.fetchUserComments();
 },
   methods: {
-    async fetchUserData() {
+    async fetchUserData(userID) {
       try {
         const token = localStorage.getItem('jwt');
-        const userResponse = await axios.get('http://127.0.0.1:8000/api/user', {
+        const userResponse = await axios.get(`http://127.0.0.1:8000/api/userdata/${userID}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -170,6 +175,12 @@ export default {
       const formattedDate = new Date(created_at).toLocaleDateString(undefined, options);
       return formattedDate;
     },
+
+
+    formatLastOnline(created_at) {
+      return moment(created_at).fromNow();
+    },
+
     filterPosts(filter) {
       this.selectedFilter = filter;
     },

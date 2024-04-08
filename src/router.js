@@ -68,7 +68,7 @@ const routes = [
     children: [
           { path: 'MyAnswers', component: MyAnswers },
           { path: 'allusers', component: allusers },
-          { path: 'profile', component: profile },
+          { path: 'profile/:id', component: profile },
           { path: 'EditProfile', component: EditProfile },
           { path: 'contact', component: contact },
           { path: 'q&a', component: QandA },

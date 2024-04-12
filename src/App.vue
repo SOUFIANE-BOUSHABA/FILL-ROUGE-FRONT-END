@@ -31,7 +31,7 @@
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle d-flex align-items-center gap-4" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <div class="d-flex align-items-center gap-2">
-                      <font-awesome-icon :icon="['fas', 'user']" />
+                      <img :src="showImg(user.avatar) || require('@/assets/user.jpg')" alt="User Image" class=" imageuser " />
                      {{user.first_name}}
                     </div>
                    
@@ -154,6 +154,16 @@ export default {
         console.error('Logout failed:', error);
       }
     },
+
+    showImg(imageUrl) {
+      if (imageUrl) {
+        return `http://localhost:8000/uploads/${imageUrl}`;
+      } else {
+        return require('@/assets/user.jpg');
+      }
+    },
+
+
   },
   
 };
@@ -172,6 +182,12 @@ footer{
   }
   .footer-link:hover{
     color: #425EF1; 
+  }
+
+  .imageuser{
+    width: 30px;
+    height:30px;
+    border-radius: 100px;
   }
   
 </style>

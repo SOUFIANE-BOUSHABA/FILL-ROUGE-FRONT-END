@@ -39,7 +39,7 @@
           <hr />
           <div class="d-flex justify-content-between align-items-center">
             <div class="d-flex gap-4 align-items-center">
-              <font-awesome-icon :icon="['fas', 'user']" />
+              <img :src="showImg(post.user.avatar) || require('@/assets/user.jpg')" alt="User Image" class=" imageuser " />
               <span>Posted by <span class="my-custom-color">{{ post.user.first_name }} {{ post.user.last_name }}</span></span>
             </div>
             <div class="d-flex gap-4 align-items-center">
@@ -128,6 +128,13 @@ export default {
       return topicVotes && topicVotes.some(vote => vote.user_id === this.auth_id && vote.value === value);
     },
 
+    showImg(imageUrl) {
+      if (imageUrl) {
+        return `http://localhost:8000/uploads/${imageUrl}`;
+      } else {
+        return require('@/assets/user.jpg');
+      }
+    },
   },
  
 };
@@ -141,4 +148,12 @@ export default {
   border-radius: 4px;
   margin-right: 4px;
 }
+.imageuser{
+    width: 30px;
+    height:30px;
+    border-radius: 100px;
+  }
+
+  
+
 </style>

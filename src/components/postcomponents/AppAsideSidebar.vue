@@ -25,6 +25,9 @@
         <font-awesome-icon :icon="['fas', 'users']" />
         Users
       </router-link>   
+      <router-link to="/addtopics" class="add"> <button type="button" class="color-btn w-100" >
+       + Add Topics
+      </button></router-link>
     </div>
   </div>
 </template>
@@ -56,6 +59,9 @@ export default {
   text-decoration: none;
   transition: background-color 0.3s;
 }
+.add{
+    display: none;
+  } 
 
 .sidebar-link i {
   margin-right: 10px;
@@ -71,5 +77,14 @@ export default {
   background-color: #425ff126;
   color: #425EF1;
   border-left: 4px solid;
+}
+@media (max-width: 1200px) {
+  .sidebar {
+    height: 300px;
+  }
+  .add{
+    display: block;
+  margin-top: 10px;
+  } 
 }
 </style>

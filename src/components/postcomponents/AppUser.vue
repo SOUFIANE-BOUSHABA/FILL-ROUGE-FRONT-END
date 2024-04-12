@@ -1,7 +1,7 @@
 <template>
     <div class="mt-4">
         
-      <router-link to="/addtopics"> <button type="button" class="color-btn w-100" >
+      <router-link to="/addtopics" class="add"> <button type="button" class="color-btn w-100" >
        + Add Topics
       </button></router-link>
   
@@ -31,6 +31,11 @@
   
   <style scoped>
 
+@media (max-width: 1200px) {
+  .add {
+    display: none;
+  }
+}
 
 
   </style>

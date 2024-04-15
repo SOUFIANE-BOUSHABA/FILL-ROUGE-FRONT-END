@@ -16,6 +16,7 @@
     "@progress/kendo-editor-vue-wrapper": "^2024.1.319",
     "@progress/kendo-vue-editor": "^4.3.2",
     "@tinymce/tinymce-vue": "^5.1.1",
+    "aos": "^2.3.4",
     "axios": "^1.6.7",
     "bootstrap": "^5.3.3",
     "bootstrap-vue": "^2.23.1",

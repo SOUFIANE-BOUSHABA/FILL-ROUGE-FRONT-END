@@ -21,7 +21,7 @@
             <div class="mx-auto">
               <div class=" d-flex gap-4">
                 <div class="">
-                  <router-link class="footer-link" to="/personel/contact">Why Foru<span class="my-custom-color">me</span>?</router-link>
+                  <router-link class="footer-link" to="/whyForume">Why Foru<span class="my-custom-color">me</span>?</router-link>
                 </div>
           <div class="">
             <router-link class="footer-link" to="/personel/contact">Contact Us</router-link>

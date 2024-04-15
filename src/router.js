@@ -26,6 +26,7 @@ import QandA from './components/personnelcomponents/AppQ&A.vue';
 import aboutus from './views/AppAboutUs.vue';
 import addtopics from './views/AppAddTopics.vue';
 import updateTopic from './views/AppUpdateTopic.vue';
+import whyForume from './views/WhyFormue.vue';
 
 
 import admin from './views/AppAdmin.vue';
@@ -62,6 +63,8 @@ const routes = [
           { path: 'forgot', component: ForgotComponent },
         ],
  },
+  {  path: '/whyForume',  component: whyForume },
+
   { 
     path: '/personel', 
     component: personnel,

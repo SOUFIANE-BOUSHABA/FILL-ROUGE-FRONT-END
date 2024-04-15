@@ -19,11 +19,20 @@
 
           <div class="collapse navbar-collapse  " id="navbarSupportedContent">
             <div class="mx-auto">
-              <form class="input-group" role="search">
-                <span class="input-group-text border-0 bg-gray" id="basic-addon1"><font-awesome-icon :icon="['fas', 'magnifying-glass']" /></span>
-                <input type="text" class="form-control border-0 bg-gray " placeholder="search for topics" aria-label="search" aria-describedby="basic-addon1">
-               
-              </form>
+              <div class=" d-flex gap-4">
+                <div class="">
+                  <router-link class="footer-link" to="/personel/contact">Why Foru<span class="my-custom-color">me</span>?</router-link>
+                </div>
+          <div class="">
+            <router-link class="footer-link" to="/personel/contact">Contact Us</router-link>
+          </div>
+          <div class="">
+            <router-link class="footer-link" to="/about">About Us</router-link>
+          </div>
+          <div class="">
+            <router-link class="footer-link" to="/personel/q&a">Q&A</router-link>
+          </div>
+        </div>
             </div>
 
             <div>
@@ -70,24 +79,7 @@
 
     <footer v-if="!$route.path.includes('/admin')" class=" border-top pt-4">
       <div class="container">
-        <div class="row">
-          <div class="col-md-1">
-            <router-link class="footer-link" to="/personel/contact">Contact Us</router-link>
-          </div>
-          <div class="col-md-1">
-            <router-link class="footer-link" to="/about">About Us</router-link>
-          </div>
-          <div class="col-md-1">
-            <router-link class="footer-link" to="/personel/q&a">Q&A</router-link>
-          </div>
-        </div>
-        <!-- <div class="row mt-3">
-          <div class="col-md-12">
-            <a href="#" class="me-3"><font-awesome-icon :icon="['fas', 'facebook']" /></a>
-            <a href="#" class="me-3"><font-awesome-icon :icon="['fas', 'twitter']" /></a>
-            <a href="#" class="me-3"><font-awesome-icon :icon="['fas', 'instagram']" /></a>
-          </div>
-        </div> -->
+        <p>Owned  by <span class="my-custom-color">Soufiane Boushaba</span> </p>
       </div>
     </footer>
   </div>
@@ -174,6 +166,7 @@ export default {
 <style scoped>
 footer{
   height: 70px;
+  background-color: rgb(38, 38, 38);
 }
   .footer-link{
     text-decoration: none;
@@ -182,6 +175,10 @@ footer{
   }
   .footer-link:hover{
     color: #425EF1; 
+  }
+  footer p{
+    color: white;
+    text-align: center;
   }
 
   .imageuser{

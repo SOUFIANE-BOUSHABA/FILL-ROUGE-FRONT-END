@@ -7,10 +7,11 @@
         </div>
         <div class="opacity-75">
           <h4 class="my-custom-color ">{{ user.first_name }} {{ user.last_name }}</h4>
-          <p class="mb-2"> <font-awesome-icon class="opacity-50" :icon="['fas', 'cake-candles']" /> Member since: {{ formatCreatedAt(user.created_at) }}</p>
+          <p class="mb-2"> <font-awesome-icon class="opacity-50" :icon="['fas', 'cake-candles']" /> Member since: {{ formatLastOnline(user.created_at) }}</p>
           <p class="mb-2"> <font-awesome-icon class="opacity-50" :icon="['fas', 'clock']" />
                   <small v-if="user.last_online == null"> <span class="enligne"></span> en ligne</small>
-                  <small v-else>Last Online: {{ formatLastOnline(user.last_online) }}</small>
+                  <small v-else>Last Online: {{ formatLastOnline(user.last_online) }}</small> 
+                 
           </p>
           <div class="d-flex gap-2 mb-4">
             <a v-if="user.hackerrank_link" :href="user.hackerrank_link" target="_blank">
@@ -59,10 +60,50 @@
       </div>
     </div>
 
+   
+    <div class="badges" v-if="user">
+        <h4  class="my-custom-color mb-4" v-if="user.points >= 40">Badges</h4>
+
+        <div class="row opacity-75 mb-4 justify-content-start p-2">
+            <div class="col-xl-3 col-sm-6" v-if="user.points >= 40" >
+                <div class="single-badges-box">
+                    <img src="@/assets/badges/badges-3.png" alt="Image">
+                    <h4>Bronze badges</h4>
+                    <p>Sed porttitor lectus nibh. Nulla porttitor accumsan.</p>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-sm-6"  v-if="user.points >= 100">
+                <div class="single-badges-box" >
+                    <img src="@/assets/badges/badges-4.png" alt="Image">
+                    <h4>Silver badges</h4>
+                    <p>Sed porttitor lectus nibh. Nulla porttitor accumsan.</p>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-sm-6"  v-if="user.points >= 200">
+                <div class="single-badges-box">
+                    <img src="@/assets/badges/badges-5.png" alt="Image">
+                    <h4>Gold badges</h4>
+                    <p>Sed porttitor lectus nibh. Nulla porttitor accumsan.</p>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-sm-6"  v-if="user.points > 400" >
+                <div class="single-badges-box">
+                    <img src="@/assets/badges/badges-6.png" alt="Image">
+                    <h4>Platinum badges</h4>
+                    <p>Sed porttitor lectus nibh. Nulla porttitor accumsan.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <div class="container">
-      <div class="d-flex justify-content-between mb-4">
+      <div class="d-flex justify-content-between mt-4">
         <div>
-          <h5 class="my-custom-color"> Questions & Answers</h5>
+          <h5 class="my-custom-color mt-4"> Questions & Answers</h5>
         </div>
 
         <div class="d-flex gap-2 bg-gray rounded">
@@ -74,12 +115,12 @@
 
       <div v-if="selectedFilter === 'all'">
         <div v-for="question in userQuestions" :key="question.id" class="mb-4 d-flex col-md-12 border-bottom p-2 align-items-center">
-          <div class="col-md-2 d-grid "> <p class="bg-success w-25 text-center rounded text-white text-bold">{{ question.total_votes }}</p>  <p class="fw-bold"> {{ formatCreatedAt(question.created_at) }}</p></div>
+          <div class="col-md-2 d-grid "> <p class="bg-success w-25 text-center rounded text-white text-bold">{{ question.total_votes }}</p>  <p class="fw-bold"> {{ formatLastOnline(question.created_at) }}</p></div>
           <p class="col-md-10 text-left" v-html="question.details"></p>
          
         </div>
         <div v-for="answer in userComments" :key="answer.id" class="mb-4 d-flex col-md-12 border-bottom p-2 align-items-center">
-          <div class="col-md-2 d-grid "> <p class="bg-success w-25 text-center rounded text-white text-bold">{{ answer.total_votes }}</p>  <p class="fw-bold"> {{ formatCreatedAt(answer.created_at) }}</p></div>
+          <div class="col-md-2 d-grid "> <p class="bg-success w-25 text-center rounded text-white text-bold">{{ answer.total_votes }}</p>  <p class="fw-bold"> {{ formatLastOnline(answer.created_at) }}</p></div>
           <p class="text-left col-md-10">{{ answer.text }}</p>
          
         </div>
@@ -87,7 +128,7 @@
 
       <div v-else-if="selectedFilter === 'questions'">
         <div v-for="question in userQuestions" :key="question.id" class="mb-4 d-flex col-md-12 border-bottom p-2 align-items-center">
-          <div class="col-md-2 d-grid "> <p class="bg-success w-25 text-center rounded text-white text-bold">{{ question.total_votes }}</p>  <p class="fw-bold"> {{ formatCreatedAt(question.created_at) }}</p></div>
+          <div class="col-md-2 d-grid "> <p class="bg-success w-25 text-center rounded text-white text-bold">{{ question.total_votes }}</p>  <p class="fw-bold"> {{ formatLastOnline(question.created_at) }}</p></div>
           <p class="col-md-10 text-left" v-html="question.details"></p>
          
         </div>
@@ -95,7 +136,7 @@
 
       <div v-else-if="selectedFilter === 'answers'">
         <div v-for="answer in userComments" :key="answer.id" class="mb-4 d-flex col-md-12 border-bottom p-2 align-items-center">
-          <div class="col-md-2 d-grid "> <p class="bg-success w-25 text-center rounded text-white text-bold">{{ answer.total_votes }}</p>  <p class="fw-bold"> {{ formatCreatedAt(answer.created_at) }}</p></div>
+          <div class="col-md-2 d-grid "> <p class="bg-success w-25 text-center rounded text-white text-bold">{{ answer.total_votes }}</p>  <p class="fw-bold"> {{ formatLastOnline(answer.created_at) }}</p></div>
           <p class="text-left col-md-10">{{ answer.text }}</p>
          
         </div>
@@ -135,6 +176,7 @@ export default {
           },
         });
         this.user = userResponse.data.user;
+        console.log('User:', this.user);
       } catch (error) {
         if (error.response && error.response.status === 401) {
           this.$router.push('/userauth/login');
@@ -201,6 +243,10 @@ export default {
   .imageuser{
     height: 12rem;
     width: 12rem;
+  }
+  .single-badges-box{
+    display: grid;
+    align-items: center;
   }
   </style>
   

@@ -120,9 +120,7 @@ export default {
     formatCreatedAt(created_at) {
       return moment(created_at).fromNow();
     },
-    showImg(imageUrl) {
-      return `http://localhost:8000/uploads/${imageUrl}`; 
-    },
+ 
 
     hasVoted(topicVotes, value) {
       return topicVotes && topicVotes.some(vote => vote.user_id === this.auth_id && vote.value === value);
@@ -154,6 +152,6 @@ export default {
     border-radius: 100px;
   }
 
-  
+
 
 </style>

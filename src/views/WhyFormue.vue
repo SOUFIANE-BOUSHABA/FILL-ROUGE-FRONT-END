@@ -1,23 +1,29 @@
 
 
 <template>
-    <div class="container">
-      <div class="row ">
-        <div class="col-md-7">
+    <div class="">
+     
+       
             <AppHero  />
+            <AppExpertise  />
+            <AppTeam  />
             
-        </div>
-      </div>
+      
     </div>
   </template>
 
 
   <script>
   import AppHero from '../components/addcomponents/AppHero.vue';
+  import AppExpertise from '../components/addcomponents/AppExpertise.vue';
+  import AppTeam from '../components/addcomponents/AppTeam.vue';
+ 
   
   export default {
     components: {
         AppHero,
+        AppExpertise,
+        AppTeam,
     },
    
   };

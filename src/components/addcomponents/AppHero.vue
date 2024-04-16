@@ -39,7 +39,6 @@
   
   <style scoped>
   .hero {
-    width: 170%;
     position: relative;
   }
   
@@ -64,13 +63,13 @@
   .shape2 {
     top: 500px;
     left: 80%;
-    width: 100px; 
-    height: 100px;
+    width: 80px; 
+    height: 80px;
   }
   
   @keyframes move {
-    0% { transform: translate(0, 0); }
-    100% { transform: translate(50px, 50px); }
+    0% { transform: translate(0, 0); opacity: 1 ; }
+    100% { transform: translate(50px, 50px); opacity: 0; }
   }
   </style>
   

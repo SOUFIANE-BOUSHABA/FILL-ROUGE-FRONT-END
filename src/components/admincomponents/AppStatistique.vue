@@ -74,6 +74,7 @@ export default {
     async fetchUserData() {
       try {
         const response = await axios.get('http://127.0.0.1:8000/api/getNumberOfUserPerDay');
+        console.log('User data:', response.data);
         this.chartData.labels = response.data.dates;
         this.chartData.datasets[0].data = response.data.usersCount;
         this.countuserrr = response.data.countuserrr;

@@ -60,7 +60,7 @@
               <hr />
               <div class="d-flex justify-content-between align-items-center">
                 <div class="d-flex gap-4 align-items-center">
-                  <font-awesome-icon :icon="['fas', 'user']" />
+                  <img :src="showImg(post.user.avatar) || require('@/assets/user.jpg')" alt="User Image" class=" imageuserpost " />
                   <span>
                     Posted by <span class="my-custom-color">{{ post.user.first_name }} {{ post.user.last_name }}</span>
                   </span>
@@ -80,7 +80,7 @@
               <div v-for="comment in post.comments" :key="comment.id" class="comment-container mt-4 ">
                 <div class="d-flex justify-content-between mb-2 p-2">
                         <div class="d-flex gap-4 align-items-center">
-                        <font-awesome-icon :icon="['fas', 'user']" />
+                          <img :src="showImg(comment.user.avatar) || require('@/assets/user.jpg')" alt="User Image" class=" imageuser " />
                         <span class="d-flex gap-4">
                             <span class="my-custom-color ">{{ comment.user.first_name }} {{ comment.user.last_name }}</span>
                             <span v-if="comment.validation == 1" class="badge text-bg-success ">valider</span>
@@ -334,10 +334,15 @@
     formatCreatedAt(created_at) {
       return moment(created_at).fromNow();
     },
-    showImg(imageUrl) {
-      return `http://localhost:8000/uploads/${imageUrl}`; 
-    },
+   
 
+    showImg(imageUrl) {
+      if (imageUrl) {
+        return `http://localhost:8000/uploads/${imageUrl}`;
+      } else {
+        return require('@/assets/user.jpg');
+      }
+    },
 
     hasVoted(topicVotes, value) {
       return topicVotes && topicVotes.some(vote => vote.user_id === this.auth_id && vote.value === value);
@@ -362,6 +367,19 @@
     border: 1px solid #ccc;
     padding: 10px;
     margin-top: 10px;
+  }
+
+  .imageuserpost{
+    width: 30px;
+    height:30px;
+    border-radius: 100px;
+  }
+
+
+  .imageuser{
+    height: 1.5rem;
+    width: 1.5rem;
+    border-radius: 50%;
   }
   .tag {
   background-color: #007bff; 

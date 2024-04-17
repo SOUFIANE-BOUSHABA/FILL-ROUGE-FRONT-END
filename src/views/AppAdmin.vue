@@ -44,7 +44,7 @@
                     <button class="btn btn-dark dropdown-toggle " type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <li><a class="dropdown-item" href="?uri=user">visiter le site web</a></li>
+                        <li><router-link class="dropdown-item" to="/">visiter le site web</router-link></li>
                         <button @click="logout" class="btn w-100">Logout</button>
 
                     </ul>

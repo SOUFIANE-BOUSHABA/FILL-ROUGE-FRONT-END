@@ -84,7 +84,7 @@ export default {
       auth_id: null,
       searchQuery: '',
       currentPage: 1,
-      perPage: 1,
+      perPage: 7,
     };
   },
 

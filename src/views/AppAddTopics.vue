@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container cr1">
     <form @submit.prevent="submitForm">
       <div class="d-flex justify-content-between mb-3 col-md-12">
         <div class="col-md-5">
@@ -167,5 +167,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.cr1{
+  margin-bottom: 120px;
+}
 </style>

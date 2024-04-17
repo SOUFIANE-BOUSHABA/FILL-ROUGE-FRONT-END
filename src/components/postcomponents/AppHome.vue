@@ -50,8 +50,7 @@
             <div class="d-flex gap-4 align-items-center">
               <span>{{ formatCreatedAt(post.created_at) }}</span> 
               <router-link :to="'/commentes/' + post.id" class="d-flex gap-2 align-items-center">
-                <font-awesome-icon class="mt-1" :icon="['fas', 'message']" />
-                <span>{{ post.comments }}</span>
+                <button class="btn btn-dark opacity-100">answer</button>
               </router-link>
             </div>
           </div>
@@ -191,6 +190,9 @@ export default {
 </script>
 
 <style scoped>
+a{
+  text-decoration: none;
+}
 .tag {
   background-color: #007bff; 
   color: #fff; 

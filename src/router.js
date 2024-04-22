@@ -34,6 +34,8 @@ import statistique from './components/admincomponents/AppStatistique.vue';
 import category from './components/admincomponents/AppCategory.vue';
 import tags from './components/admincomponents/AppTags.vue';
 import users from './components/admincomponents/AppUsers.vue';
+import permission from './components/admincomponents/AppPermission.vue';
+// import topic from './components/admincomponents/AppTopics.vue';
 
 
 
@@ -97,6 +99,7 @@ const routes = [
         { path: 'category', component: category },
         { path: 'tag', component: tags },
         { path: 'users', component: users },
+        { path: 'permission', component: permission },
        ],
      
 },

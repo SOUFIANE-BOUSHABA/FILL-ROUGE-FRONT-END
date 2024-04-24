@@ -80,6 +80,7 @@ export default {
             },
           });
         this.posts = response.data.topics;
+        console.log(this.posts)
         this.auth_id = response.data.user_id;
       } catch (error) {
         console.error('Error fetching topics:', error);

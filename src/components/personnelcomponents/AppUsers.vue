@@ -5,10 +5,7 @@
         <input type="text" v-model="searchQuery" placeholder="Search users" class="form-control" />
       </div>
       <div>
-        <select v-model="sortBy" class="form-select">
-          <option value="name">Sort by Name</option>
-          <option value="postCount">Sort by Post Count</option>
-        </select>
+      
       </div>
     </div>
 
@@ -65,7 +62,6 @@ export default {
   data() {
     return {
       searchQuery: '',
-      sortBy: 'name',
       users: [],
       currentPage: 1,
       perPage: 9,

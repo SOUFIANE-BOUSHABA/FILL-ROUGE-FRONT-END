@@ -48,6 +48,7 @@
                   <ul class="dropdown-menu">
                     <li><router-link :to="'/personel/profile/' +user.id" class="dropdown-item">profile</router-link></li>
                     <li><a class="dropdown-item" href="/personel/EditProfile">parameter</a></li>
+                    <li><a class="dropdown-item" href="/admin/statistique">dashboard</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li v-if="isLoggedIn">
                       <button @click="logout" class="btn w-100">Logout</button>

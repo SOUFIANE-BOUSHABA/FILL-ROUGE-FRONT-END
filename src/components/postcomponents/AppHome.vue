@@ -5,7 +5,7 @@
       <input type="text" class="form-control" v-model="searchQuery" placeholder="Search posts...">
     </div>
 
-    <div v-for="post in paginatedPosts" :key="post.id" class="row opacity-75 shadow-sm p-4 mb-4">
+    <div  v-for="post in paginatedPosts" :key="post.id" class="row opacity-75 shadow-sm p-4 mb-4">
       <div class="col-md-2 d-grid">
         <div class="d-flex mt-3 flex-column align-items-center">
           <font-awesome-icon v-if="hasVoted(post.topic_votes, 1)" style="color: #007bff;" @click="vote(post.id, 1)" :icon="['fas', 'arrow-alt-circle-up']" />
@@ -80,6 +80,7 @@ export default {
   name: 'AppHome',
   data() {
     return {
+      
       posts: [],
       auth_id: null,
       searchQuery: '',
